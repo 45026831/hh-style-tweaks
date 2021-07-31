@@ -44,34 +44,6 @@ var sheet = (function() {
 const loadConfig = () => {
 }
 
-// League stat box alignment
-// sheet.insertRule(`
-// .player_block .lead_ego {
-//     left: 11px;
-// }
-// `)
-// sheet.insertRule(`
-// .player_block .stats_wrap>div:nth-child(even) {
-//     margin-right: 9px;
-// {
-// `)
-
-// Opponent team star overflow fix
-// sheet.insertRule(`
-// .battle_user_block>.battle-faces>div[rel=g1] .less_stars>g {
-//     width: 12px;
-//     height: 17px;
-// }
-// `)
-// sheet.insertRule(`
-// .battle_user_block>.battle-faces>div[rel=g2] .less_stars>g, .battle_user_block>.battle-faces>div[rel=g3] .less_stars>g {
-//     width: 6px;
-//     height: 6px;
-//     margin-top: 3px!important;
-// }
-// `)
-// $('.less_stars').has(':nth-child(6)').addClass('more_stars').removeClass('less_stars')
-
 // Seasons button border
 sheet.insertRule(`
 #homepage>a:hover>.position>span.seasons_button {
@@ -112,11 +84,6 @@ tbody.compressed tr {
     line-height: 21px !important;
 }
 `)
-// sheet.insertRule(`
-// .lead_table table tbody.compressed tr>td .nickname {
-//     width: -webkit-fill-available;
-// }
-// `)
 sheet.insertRule(`
 .lead_table table tbody.compressed tr>td .nickname {
     width: 243px;
@@ -220,53 +187,6 @@ sheet.insertRule(`
     background-image: url(https://hh.hh-content.com/clubs/ic_Tick.png);
 }
 `)
-
-// Overriding the script's override
-// sheet.insertRule(`
-// .green-tick-icon {
-//     background-color: #75b400;
-// }
-// `)
-// sheet.insertRule(`
-// .green-tick-icon.empty {
-//     background-image: none;
-//     -webkit-mask: url("https://hh.hh-content.com/design/ic_tick_white.svg") 50% 50% / contain no-repeat;
-// }
-// `)
-// sheet.insertRule(`
-// .green-tick-icon.empty::after {
-//     content: '';
-//     width: 22px;
-//     height: 16px;
-//     -webkit-mask: url("https://hh.hh-content.com/design/ic_tick_white.svg") 50% 79% / 80% no-repeat;
-//     background-color: #000;
-//     position: fixed;
-//     opacity: 0.8;
-// }
-// `)
-// sheet.insertRule(`
-// .green-tick-icon {
-//     background-image: url(https://hh.hh-content.com/clubs/ic_Tick.png);
-// }
-// `)
-// sheet.insertRule(`
-// .green-tick-icon.empty::after {
-//     content: '';
-//     width: 22px;
-//     height: 16px;
-//     -webkit-mask: url(https://hh.hh-content.com/clubs/ic_Tick.png) 50% 50% / contain no-repeat;
-//     background-image:
-//         radial-gradient(circle farthest-corner at 21% 39%, black 0%, transparent 24%),
-//         radial-gradient(circle farthest-corner at 31% 57%, black 0%, transparent 24%),
-//         radial-gradient(circle farthest-corner at 40% 77%, black 0%, transparent 24%),
-//         radial-gradient(circle farthest-corner at 52% 62%, black 0%, transparent 24%),
-//         radial-gradient(circle farthest-corner at 63% 46%, black 0%, transparent 24%),
-//         radial-gradient(circle farthest-corner at 75% 31%, black 0%, transparent 24%);
-//     position: fixed;
-//     opacity: 0.8;
-//     filter: blur(1px);
-// }
-// `)
 
 // Sidequest completion markers
 sheet.insertRule(`
