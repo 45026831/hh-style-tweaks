@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH
-// @version         0.1.0
+// @version         0.1.1
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.1.1: Removing black border from config button to work around sub-pixel rendering issues. Making league table stripes its own config option.
 // 0.1.0: Major refactor to include configuration.
 // 0.0.14: Adding jquery to replace all old style buttons with new-stlye buttons.
 // 0.0.13: Removing tweaks for old PoA screen, fixing scrollbar for new PoA screen.
@@ -76,6 +77,10 @@
         },
         leagueTableCompressed: {
             name: 'Compact league table',
+            default: true
+        },
+        leagueTableRowStripes: {
+            name: 'Striped league table rows',
             default: true
         },
         leagueTableShadow: {
@@ -169,7 +174,7 @@
             panelShown = !panelShown
         }
 
-        const configButton = $('<div><div></div></div>').addClass('styleTweaksCfgBtn').attr('title', 'Style Tweaks').click(togglePanel)
+        const configButton = $('<div></div>').addClass('styleTweaksCfgBtn').attr('title', 'Style Tweaks').click(togglePanel)
         const configPanel = $('<div></div>').addClass('styleTweaksCfgPanel').addClass('hidden')
         Object.keys(configSchema).forEach(key => {
             const schema = configSchema[key]
@@ -186,7 +191,14 @@
             .styleTweaksCfgBtn {
                 height: 35px;
                 width: 35px;
-                background-color: black;
+                background-color: white;
+                background-image:
+                    radial-gradient(circle farthest-corner at 100% 50%, red 0%, transparent 40%),
+                    radial-gradient(circle farthest-corner at 75% 93.30127%, magenta 0%, transparent 40%),
+                    radial-gradient(circle farthest-corner at 25% 93.30127%, blue 0%, transparent 40%),
+                    radial-gradient(circle farthest-corner at 0% 50%, cyan 0%, transparent 40%),
+                    radial-gradient(circle farthest-corner at 25% 6.69873%, green 0%, transparent 40%),
+                    radial-gradient(circle farthest-corner at 75% 6.69873%, yellow 0%, transparent 40%);
                 clip-path: polygon(98.66025% 45%, 99.39693% 46.5798%, 99.84808% 48.26352%, 100% 50%, 99.84808% 51.73648%, 99.39693% 53.4202%, 98.66025% 55%, 78.66025% 89.64102%, 77.66044% 91.06889%, 76.42788% 92.30146%, 75% 93.30127%, 73.4202% 94.03794%, 71.73648% 94.48909%, 70% 94.64102%, 30% 94.64102%, 28.26352% 94.48909%, 26.5798% 94.03794%, 25% 93.30127%, 23.57212% 92.30146%, 22.33956% 91.06889%, 21.33975% 89.64102%, 1.33975% 55%, 0.60307% 53.4202%, 0.15192% 51.73648%, 0% 50%, 0.15192% 48.26352%, 0.60307% 46.5798%, 1.33975% 45%, 21.33975% 10.35898%, 22.33956% 8.93111%, 23.57212% 7.69854%, 25% 6.69873%, 26.5798% 5.96206%, 28.26352% 5.51091%, 30% 5.35898%, 70% 5.35898%, 71.73648% 5.51091%, 73.4202% 5.96206%, 75% 6.69873%, 76.42788% 7.69854%, 77.66044% 8.93111%, 78.66025% 10.35898%);
                 position: absolute;
                 top: 125px;
@@ -204,22 +216,6 @@
                 position: absolute;
                 top: 0px;
                 left: 0px;
-            }
-        `)
-        sheet.insertRule(`
-            .styleTweaksCfgBtn>div {
-                height: 33px;
-                width: 33px;
-                background-color: white;
-                background-image:
-                    radial-gradient(circle farthest-corner at 100% 50%, red 0%, transparent 40%),
-                    radial-gradient(circle farthest-corner at 75% 93.30127%, magenta 0%, transparent 40%),
-                    radial-gradient(circle farthest-corner at 25% 93.30127%, blue 0%, transparent 40%),
-                    radial-gradient(circle farthest-corner at 0% 50%, cyan 0%, transparent 40%),
-                    radial-gradient(circle farthest-corner at 25% 6.69873%, green 0%, transparent 40%),
-                    radial-gradient(circle farthest-corner at 75% 6.69873%, yellow 0%, transparent 40%);
-                clip-path: polygon(98.66025% 45%, 99.39693% 46.5798%, 99.84808% 48.26352%, 100% 50%, 99.84808% 51.73648%, 99.39693% 53.4202%, 98.66025% 55%, 78.66025% 89.64102%, 77.66044% 91.06889%, 76.42788% 92.30146%, 75% 93.30127%, 73.4202% 94.03794%, 71.73648% 94.48909%, 70% 94.64102%, 30% 94.64102%, 28.26352% 94.48909%, 26.5798% 94.03794%, 25% 93.30127%, 23.57212% 92.30146%, 22.33956% 91.06889%, 21.33975% 89.64102%, 1.33975% 55%, 0.60307% 53.4202%, 0.15192% 51.73648%, 0% 50%, 0.15192% 48.26352%, 0.60307% 46.5798%, 1.33975% 45%, 21.33975% 10.35898%, 22.33956% 8.93111%, 23.57212% 7.69854%, 25% 6.69873%, 26.5798% 5.96206%, 28.26352% 5.51091%, 30% 5.35898%, 70% 5.35898%, 71.73648% 5.51091%, 73.4202% 5.96206%, 75% 6.69873%, 76.42788% 7.69854%, 77.66044% 8.93111%, 78.66025% 10.35898%);
-                margin: 1px;
             }
         `)
 
@@ -319,6 +315,9 @@
                 font-size: 13px;
             }
         `)
+    }
+
+    if (config.leagueTableRowStripes && currentPage.includes('tower-of-fame')) {
         sheet.insertRule(`
             .lead_table table tbody tr:not([style]):nth-of-type(even) {
                 background-color: rgba(191,40,90,.25);
