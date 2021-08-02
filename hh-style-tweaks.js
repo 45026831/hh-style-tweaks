@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH
-// @version         0.1.1
+// @version         0.1.2
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.1.2: Fixing specificity of compact table styles
 // 0.1.1: Removing black border from config button to work around sub-pixel rendering issues. Making league table stripes its own config option.
 // 0.1.0: Major refactor to include configuration.
 // 0.0.14: Adding jquery to replace all old style buttons with new-stlye buttons.
@@ -274,19 +275,19 @@
     if (config.leagueTableCompressed && currentPage.includes('tower-of-fame')) {
         // League table compressed view
         sheet.insertRule(`
-            .square-avatar-wrapper {
+            .lead_table .square-avatar-wrapper {
                 height: 21px;
                 width: 21px;
             }
         `)
         sheet.insertRule(`
-            .square-avatar-wrapper img {
+            .lead_table .square-avatar-wrapper img {
                 height: 15px;
                 width: 15px;
             }
         `)
         sheet.insertRule(`
-            .square-avatar-wrapper img.classLeague {
+            .lead_table .square-avatar-wrapper img.classLeague {
                 height: 15px !important;
                 width: 15px !important;
                 top: -4px;
@@ -294,13 +295,13 @@
             }
         `)
         sheet.insertRule(`
-            .country {
+            .lead_table .country {
                 transform: scale(0.5);
                 margin: 0px !important;
             }
         `)
         sheet.insertRule(`
-            tbody tr {
+            .lead_table tbody tr {
                 height: 21px !important;
                 line-height: 21px !important;
             }
