@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH
-// @version         0.1.3
+// @version         0.1.4
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.1.4: Fixing compact league table in OperaGX
 // 0.1.3: Adding circular border for config button
 // 0.1.2: Fixing specificity of compact table styles
 // 0.1.1: Removing black border from config button to work around sub-pixel rendering issues. Making league table stripes its own config option.
@@ -320,7 +321,7 @@
         `)
         sheet.insertRule(`
             .lead_table table tbody tr>td .nickname {
-                width: 243px;
+                width: 242px;
             }
         `)
         sheet.insertRule(`
