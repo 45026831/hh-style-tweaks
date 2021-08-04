@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH
-// @version         0.1.5
+// @version         0.1.6
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.1.6: Increasing z-index of skip button to be on top of all girls
 // 0.1.5: Adding a tweak to move the skip button back to the bottom on the new battle screen
 // 0.1.4: Fixing compact league table in OperaGX
 // 0.1.3: Adding circular border for config button
@@ -639,7 +640,7 @@
             #new_battle #new-battle-skip-btn {
                 position: relative;
                 top: 388px;
-                z-index: 10;
+                z-index: 20;
             }
         `)
     }
