@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH
-// @version         0.1.4
+// @version         0.1.5
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.1.5: Adding a tweak to move the skip button back to the bottom on the new battle screen
 // 0.1.4: Fixing compact league table in OperaGX
 // 0.1.3: Adding circular border for config button
 // 0.1.2: Fixing specificity of compact table styles
@@ -88,6 +89,10 @@
         },
         leagueTableShadow: {
             name: 'Remove league table shadow',
+            default: true
+        },
+        moveSkipButton: {
+            name: 'Move the battle skip button down',
             default: true
         },
         newButtons: {
@@ -627,5 +632,15 @@
         $('button.blue_text_button').addClass('blue_button_L').removeClass('blue_text_button')
         $('button.orange_text_button').addClass('orange_button_L').removeClass('orange_text_button')
         $('button.green_text_button').addClass('green_button_L').removeClass('green_text_button')
+    }
+
+    if (config.moveSkipButton) {
+        sheet.insertRule(`
+            #new_battle #new-battle-skip-btn {
+                position: relative;
+                top: 388px;
+                z-index: 10;
+            }
+        `)
     }
 })()
