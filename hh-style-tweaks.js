@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH
-// @version         0.1.6
+// @version         0.1.7
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.1.7: Adding style for promotion markers on compact league table
 // 0.1.6: Increasing z-index of skip button to be on top of all girls
 // 0.1.5: Adding a tweak to move the skip button back to the bottom on the new battle screen
 // 0.1.4: Fixing compact league table in OperaGX
@@ -333,6 +334,12 @@
         sheet.insertRule(`
             .lead_table table tbody tr>td {
                 font-size: 13px;
+            }
+        `)
+        sheet.insertRule(`
+            .lead_table table tbody tr>td:first-child .promotion {
+                margin-right: 26px;
+                height: 16px;
             }
         `)
     }
