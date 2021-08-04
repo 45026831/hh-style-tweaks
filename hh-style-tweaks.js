@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH
-// @version         0.1.9
+// @version         0.1.10
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.1.10: Adding burger menu rules for HH.com
 // 0.1.9: Adding a preventative measure against flower overflow on long girl names such as "Anniversary Bunny's Mother"
 // 0.1.8: Adding a tweak to correct the aspect ratio on the girl poses in the new battle animations
 // 0.1.7: Adding style for promotion markers on compact league table
@@ -481,6 +482,24 @@
                     height: auto;
                     margin: 5px 10px;
                     padding: 11px 18px;
+                }
+            `)
+        } else if ([
+            "www.hentaiheroes.com"
+        ].includes(window.location.host)) {
+            sheet.insertRule(`
+                #contains_all>nav>[rel=content]>div {
+                    width: 44%;
+                    padding: 18px 10px;
+                }
+            `)
+            sheet.insertRule(`
+                #contains_all>nav>[rel=content]>div>a {
+                    width: auto;
+                    height: auto;
+                    margin: 5px 10px;
+                    padding: 5px 9px;
+                    font-size: 12px;
                 }
             `)
         }
