@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH
-// @version         0.1.8
+// @version         0.1.9
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.1.9: Adding a preventative measure against flower overflow on long girl names such as "Anniversary Bunny's Mother"
 // 0.1.8: Adding a tweak to correct the aspect ratio on the girl poses in the new battle animations
 // 0.1.7: Adding style for promotion markers on compact league table
 // 0.1.6: Increasing z-index of skip button to be on top of all girls
@@ -56,6 +57,10 @@
     const configSchema = {
         blessingsButtonAlign: {
             name: 'Align blessings button',
+            default: true
+        },
+        bonusFlowersOverflow: {
+            name: 'Prevent bonus flowers dropping off-screen',
             default: true
         },
         champGirlPower: {
@@ -662,6 +667,15 @@
             #new_battle .new-battle-girl-container {
                 height: 450px;
                 margin-top: -40px;
+            }
+        `)
+    }
+
+    if (config.bonusFlowersOverflow) {
+        sheet.insertRule(`
+            #popups .shards_name {
+                max-width: 340px;
+                line-height: 20px;
             }
         `)
     }
