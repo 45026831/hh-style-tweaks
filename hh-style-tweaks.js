@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH
-// @version         0.1.7
+// @version         0.1.8
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.1.8: Adding a tweak to correct the aspect ratio on the girl poses in the new battle animations
 // 0.1.7: Adding style for promotion markers on compact league table
 // 0.1.6: Increasing z-index of skip button to be on top of all girls
 // 0.1.5: Adding a tweak to move the skip button back to the bottom on the new battle screen
@@ -119,6 +120,10 @@
         },
         poaBorders: {
             name: 'Green borders on obtained PoA rewards',
+            default: true
+        },
+        poseAspectRatio: {
+            name: 'Fix girl pose aspect ratio in battle',
             default: true
         },
         removeParticleEffects: {
@@ -648,6 +653,15 @@
                 position: relative;
                 top: 388px;
                 z-index: 20;
+            }
+        `)
+    }
+
+    if (config.poseAspectRatio) {
+        sheet.insertRule(`
+            #new_battle .new-battle-girl-container {
+                height: 450px;
+                margin-top: -40px;
             }
         `)
     }
