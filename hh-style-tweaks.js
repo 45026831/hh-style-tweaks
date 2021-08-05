@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
-// @description     Some styling tweaks for HH
-// @version         0.1.10
+// @description     Some styling tweaks for HH, with some support for GH and CxH
+// @version         0.2.0
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
 // @match           https://thrix.hentaiheroes.com/*
 // @match           https://www.gayharem.com/*
 // @match           https://nutaku.gayharem.com/*
+// @match           https://www.comixharem.com/*
+// @match           https://nutaku.comixharem.com/*
 // @run-at          document-end
 // @updateURL       https://raw.githubusercontent.com/45026831/hh-style-tweaks/main/hh-style-tweaks.js
 // @downloadURL     https://raw.githubusercontent.com/45026831/hh-style-tweaks/main/hh-style-tweaks.js
@@ -18,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.0: Adding proper support for GH and CxH
 // 0.1.10: Adding burger menu rules for HH.com
 // 0.1.9: Adding a preventative measure against flower overflow on long girl names such as "Anniversary Bunny's Mother"
 // 0.1.8: Adding a tweak to correct the aspect ratio on the girl poses in the new battle animations
@@ -49,6 +52,44 @@
     const LS_CONFIG_NAME = 'HHStyleTweaksConfig'
     const currentPage = location.pathname
 
+    // Game detection
+    const isHH = [
+        'www.hentaiheroes.com',
+        'nutaku.haremheroes.com',
+        'eroges.hentaiheroes.com',
+        'thrix.hentaiheroes.com'
+    ].includes(location.host)
+    const isGH = [
+        'www.gayharem.com',
+        'nutaku.gayharem.com'
+    ].includes(location.host)
+    const isCxH = [
+        'www.comixharem.com',
+        'nutaku.comixharem.com'
+    ].includes(location.host)
+
+    const gameConfigs = {
+        HH: {
+            girl: 'girl',
+            homeColor: '#ffb827',
+            tableRow: 'rgba(191,40,90,.25)',
+            flower: 'flower'
+        },
+        GH: {
+            girl: 'guy',
+            homeColor: '#69daff',
+            tableRow: 'rgba(191,40,90,.25)',
+            flower: 'lollipop'
+        },
+        CxH: {
+            girl: 'girl',
+            homeColor: 'black',
+            tableRow: '',
+            flower: 'jewel'
+        }
+    }
+    const gameConfig = isHH ? gameConfigs.HH : isGH ? gameConfigs.GH : isCxH ? gameConfigs.CxH : {}
+
     // Define CSS
     var sheet = (function() {
         var style = document.createElement('style');
@@ -63,11 +104,11 @@
             default: true
         },
         bonusFlowersOverflow: {
-            name: 'Prevent bonus flowers dropping off-screen',
+            name: `Prevent bonus ${gameConfig.flower}s dropping off-screen`,
             default: true
         },
         champGirlPower: {
-            name: 'Fix Champion girl power overflow',
+            name: `Fix Champion ${gameConfig.girl} power overflow`,
             default: true
         },
         clubTableShadow: {
@@ -79,11 +120,11 @@
             default: true
         },
         eventGirlBorders: {
-            name: 'Green borders on obtained event girls',
+            name: `Green borders on obtained event ${gameConfig.girl}s`,
             default: true
         },
         eventGirlTicks: {
-            name: 'Improved event girl ticks',
+            name: `Improved event ${gameConfig.girl} ticks`,
             default: true
         },
         hideGameLinks: {
@@ -92,15 +133,15 @@
         },
         leagueTableCompressed: {
             name: 'Compact league table',
-            default: true
+            default: isHH || isGH
         },
         leagueTableRowStripes: {
             name: 'Striped league table rows',
-            default: true
+            default: isHH || isGH
         },
         leagueTableShadow: {
             name: 'Remove league table shadow',
-            default: true
+            default: isHH || isGH
         },
         moveSkipButton: {
             name: 'Move the battle skip button down',
@@ -131,7 +172,7 @@
             default: true
         },
         poseAspectRatio: {
-            name: 'Fix girl pose aspect ratio in battle',
+            name: `Fix ${gameConfig.girl} pose aspect ratio in battle`,
             default: true
         },
         removeParticleEffects: {
@@ -152,7 +193,7 @@
         },
         seasonsButton: {
             name: 'Fix border on Seasons button',
-            default: true
+            default: isHH || isGH
         },
         shrinkBundles: {
             name: 'Shrink bundles',
@@ -300,7 +341,7 @@
         // Seasons button border
         sheet.insertRule(`
             #homepage>a:hover>.position>span.seasons_button {
-                border: 1px solid #ffb827;
+                border: 1px solid ${gameConfig.homeColor};
             }
         `)
     }
@@ -360,7 +401,7 @@
     if (config.leagueTableRowStripes && currentPage.includes('tower-of-fame')) {
         sheet.insertRule(`
             .lead_table table tbody tr:not([style]):nth-of-type(even) {
-                background-color: rgba(191,40,90,.25);
+                background-color: ${gameConfig.tableRow};
             }
         `)
     }
@@ -470,7 +511,10 @@
     if (config.compactNav) {
         // Burger menu tweaks
         if ([
-            "nutaku.haremheroes.com"
+            "nutaku.haremheroes.com",
+            "nutaku.gayharem.com",
+            "www.comixharem.com",
+            "nutaku.comixharem.com"
         ].includes(window.location.host)) {
             sheet.insertRule(`
                 #contains_all>nav>[rel=content]>div {
@@ -487,7 +531,8 @@
                 }
             `)
         } else if ([
-            "www.hentaiheroes.com"
+            "www.hentaiheroes.com",
+            "www.gayharem.com"
         ].includes(window.location.host)) {
             sheet.insertRule(`
                 #contains_all>nav>[rel=content]>div {
