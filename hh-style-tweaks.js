@@ -6,6 +6,8 @@
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
 // @match           https://thrix.hentaiheroes.com/*
+// @match           https://www.gayharem.com/*
+// @match           https://nutaku.gayharem.com/*
 // @run-at          document-end
 // @updateURL       https://raw.githubusercontent.com/45026831/hh-style-tweaks/main/hh-style-tweaks.js
 // @downloadURL     https://raw.githubusercontent.com/45026831/hh-style-tweaks/main/hh-style-tweaks.js
