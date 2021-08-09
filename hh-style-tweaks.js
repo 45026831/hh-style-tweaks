@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.1
+// @version         0.2.2
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.2: Extracting lang and locale from html tag instead of browser
 // 0.2.1: Applying same compact nav styles on all sites due to overflows on the nav items in some languages
 // 0.2.0: Adding proper support for GH and CxH
 // 0.1.10: Adding burger menu rules for HH.com
@@ -52,6 +53,12 @@
     const {$, localStorage, location} = window
     const LS_CONFIG_NAME = 'HHStyleTweaksConfig'
     const currentPage = location.pathname
+
+    const lang = $('html')[0].lang.substring(0,2)
+    let locale = 'fr'
+    if (lang === 'en') {
+        locale = 'en'
+    }
 
     // Game detection
     const isHH = [
@@ -661,7 +668,7 @@
             const fixedParts = statusText.split(' ').map(part => {
                 if (part.trim().match(/^[0-9]+$/)) {
                     const parsed = parseInt(part, 10)
-                    part = parsed.toLocaleString()
+                    part = parsed.toLocaleString(locale)
                 }
     
                 return part
