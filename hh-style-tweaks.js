@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.0
+// @version         0.2.1
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.1: Applying same compact nav styles on all sites due to overflows on the nav items in some languages
 // 0.2.0: Adding proper support for GH and CxH
 // 0.1.10: Adding burger menu rules for HH.com
 // 0.1.9: Adding a preventative measure against flower overflow on long girl names such as "Anniversary Bunny's Mother"
@@ -510,46 +511,21 @@
 
     if (config.compactNav) {
         // Burger menu tweaks
-        if ([
-            "nutaku.haremheroes.com",
-            "nutaku.gayharem.com",
-            "www.comixharem.com",
-            "nutaku.comixharem.com"
-        ].includes(window.location.host)) {
-            sheet.insertRule(`
-                #contains_all>nav>[rel=content]>div {
-                    width: 44%;
-                    padding: 18px 10px;
-                }
-            `)
-            sheet.insertRule(`
-                #contains_all>nav>[rel=content]>div>a {
-                    width: auto;
-                    height: auto;
-                    margin: 5px 10px;
-                    padding: 11px 18px;
-                }
-            `)
-        } else if ([
-            "www.hentaiheroes.com",
-            "www.gayharem.com"
-        ].includes(window.location.host)) {
-            sheet.insertRule(`
-                #contains_all>nav>[rel=content]>div {
-                    width: 44%;
-                    padding: 18px 10px;
-                }
-            `)
-            sheet.insertRule(`
-                #contains_all>nav>[rel=content]>div>a {
-                    width: auto;
-                    height: auto;
-                    margin: 5px 10px;
-                    padding: 5px 9px;
-                    font-size: 12px;
-                }
-            `)
-        }
+        sheet.insertRule(`
+            #contains_all>nav>[rel=content]>div {
+                width: 44%;
+                padding: 18px 10px;
+            }
+        `)
+        sheet.insertRule(`
+            #contains_all>nav>[rel=content]>div>a {
+                width: auto;
+                height: auto;
+                margin: 5px 10px;
+                padding: 5px 9px;
+                font-size: 12px;
+            }
+        `)
     }
 
     if (config.scriptPromoBanner) {
