@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.2
+// @version         0.2.3
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.3: Re-tweaking the compact main menu after UI changes in-game
 // 0.2.2: Extracting lang and locale from html tag instead of browser
 // 0.2.1: Applying same compact nav styles on all sites due to overflows on the nav items in some languages
 // 0.2.0: Adding proper support for GH and CxH
@@ -531,6 +532,18 @@
                 margin: 5px 10px;
                 padding: 5px 9px;
                 font-size: 12px;
+                line-height: 20px;
+            }
+        `)
+        sheet.insertRule(`
+            #contains_all>nav>[rel=content]>div>a>div {
+                margin: 0px;
+            }
+        `)
+        sheet.insertRule(`
+            #contains_all>nav>[rel=content]>div>a>div ic {
+                width: 20px;
+                height: 20px;
             }
         `)
     }
