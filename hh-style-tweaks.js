@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.3
+// @version         0.2.4
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.4: Removing unnecessary selector that was intended to get stripes working with HH++ Hide
 // 0.2.3: Re-tweaking the compact main menu after UI changes in-game
 // 0.2.2: Extracting lang and locale from html tag instead of browser
 // 0.2.1: Applying same compact nav styles on all sites due to overflows on the nav items in some languages
@@ -409,7 +410,7 @@
 
     if (config.leagueTableRowStripes && currentPage.includes('tower-of-fame')) {
         sheet.insertRule(`
-            .lead_table table tbody tr:not([style]):nth-of-type(even) {
+            .lead_table table tbody tr:nth-of-type(even) {
                 background-color: ${gameConfig.tableRow};
             }
         `)
