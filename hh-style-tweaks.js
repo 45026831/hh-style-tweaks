@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.4
+// @version         0.2.5
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.5: Properly re-tweaking compact main menu as a grid
 // 0.2.4: Removing unnecessary selector that was intended to get stripes working with HH++ Hide
 // 0.2.3: Re-tweaking the compact main menu after UI changes in-game
 // 0.2.2: Extracting lang and locale from html tag instead of browser
@@ -521,9 +522,17 @@
     if (config.compactNav) {
         // Burger menu tweaks
         sheet.insertRule(`
+            #contains_all>nav>[rel=content] .extender {
+                display: none;
+            }
+        `)
+        sheet.insertRule(`
             #contains_all>nav>[rel=content]>div {
-                width: 44%;
+                height: auto;
+                width: auto;
                 padding: 18px 10px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
             }
         `)
         sheet.insertRule(`
