@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.5
+// @version         0.2.6
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.6: Adding tweak to hide the new PoP buttons
 // 0.2.5: Properly re-tweaking compact main menu as a grid
 // 0.2.4: Removing unnecessary selector that was intended to get stripes working with HH++ Hide
 // 0.2.3: Re-tweaking the compact main menu after UI changes in-game
@@ -181,6 +182,10 @@
         poaBorders: {
             name: 'Green borders on obtained PoA rewards',
             default: true
+        },
+        popButtons: {
+            name: 'Hide Auto-assign and Auto-claim PoP buttons',
+            default: false
         },
         poseAspectRatio: {
             name: `Fix ${gameConfig.girl} pose aspect ratio in battle`,
@@ -748,6 +753,14 @@
             #popups .shards_name {
                 max-width: 340px;
                 line-height: 20px;
+            }
+        `)
+    }
+
+    if (config.popButtons && currentPage.includes('activities')) {
+        sheet.insertRule(`
+            #pop .pop_list .pop-action-btn {
+                display: none;
             }
         `)
     }
