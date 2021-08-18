@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.6
+// @version         0.2.7
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.7: Adding tweak for contest notifications
 // 0.2.6: Adding tweak to hide the new PoP buttons
 // 0.2.5: Properly re-tweaking compact main menu as a grid
 // 0.2.4: Removing unnecessary selector that was intended to get stripes working with HH++ Hide
@@ -217,6 +218,10 @@
         },
         sidequestCompletionMarkers: {
             name: 'Sidequest completion markers',
+            default: true
+        },
+        contestNotifs: {
+            name: 'Move contest notifications',
             default: true
         }
     }
@@ -761,6 +766,34 @@
         sheet.insertRule(`
             #pop .pop_list .pop-action-btn {
                 display: none;
+            }
+        `)
+    }
+
+    if (config.contestNotifs) {
+        sheet.insertRule(`
+            #popups #objective_popup, #sliding-popups #objective_popup {
+                left: unset;
+            }
+        `)
+        sheet.insertRule(`
+            #popups #objective_popup .noti_box, #sliding-popups #objective_popup .noti_box {
+                left: 0px;
+                right: unset;
+                border-radius: 0 .5rem .5rem 0;
+                padding: .25rem .5rem .25rem 1rem;
+            }
+        `)
+        sheet.insertRule(`
+            #popups #objective_popup .noti_box:before, #sliding-popups #objective_popup .noti_box:before {
+                background: transparent linear-gradient(90deg,rgba(255,162,62,0) 0,#ffa23e 100%) 0 0 no-repeat padding-box;
+                border-radius: 0 .5rem .5rem 0;
+            }
+        `)
+        sheet.insertRule(`
+            #popups #objective_popup .noti_box:after, #sliding-popups #objective_popup .noti_box:after {
+                border-radius: 0 .25rem .25rem 0;
+                background: transparent linear-gradient(90deg,#200307 0,#410009 100%) 0 0 no-repeat padding-box;
             }
         `)
     }
