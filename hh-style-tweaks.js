@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.7
+// @version         0.2.8
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.8: Adding tweak for contest table points to prevent the medal icon from falling onto another row
 // 0.2.7: Adding tweak for contest notifications
 // 0.2.6: Adding tweak to hide the new PoP buttons
 // 0.2.5: Properly re-tweaking compact main menu as a grid
@@ -222,6 +223,10 @@
         },
         contestNotifs: {
             name: 'Move contest notifications',
+            default: true
+        },
+        contentPointsWidth: {
+            name: 'Prevent contest table points overflow',
             default: true
         }
     }
@@ -794,6 +799,19 @@
             #popups #objective_popup .noti_box:after, #sliding-popups #objective_popup .noti_box:after {
                 border-radius: 0 .25rem .25rem 0;
                 background: transparent linear-gradient(90deg,#200307 0,#410009 100%) 0 0 no-repeat padding-box;
+            }
+        `)
+    }
+
+    if (config.contentPointsWidth && currentPage.includes('activities')) {
+        sheet.insertRule(`
+            #contests>div>div.right_part>.ranking table tbody tr td:nth-child(2) {
+                width: 230px;
+            }
+        `)
+        sheet.insertRule(`
+            #contests>div>div.right_part>.ranking table tbody tr td:nth-child(3) {
+                width: 125px;
             }
         `)
     }
