@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.11
+// @version         0.2.12
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.12: Removing promo banners tweak. Updates will be done in HH++ itself going forward.
 // 0.2.11: Fixing PoA tick position tweak to respect game-specific colours
 // 0.2.10: Adding tweak to fix girl pose fade on PoA
 // 0.2.9: Removing no longer needed scrollbar tweak for PoA
@@ -108,7 +109,7 @@
             flower: 'jewel'
         }
     }
-    const gameConfig = isHH ? gameConfigs.HH : isGH ? gameConfigs.GH : isCxH ? gameConfigs.CxH : {}
+    const gameConfig = isGH ? gameConfigs.GH : isCxH ? gameConfigs.CxH : gameConfigs.HH
 
     // Define CSS
     var sheet = (function() {
@@ -202,10 +203,6 @@
         removeParticleEffects: {
             name: 'Remove home screen particle effects',
             default: true
-        },
-        scriptPromoBanner: {
-            name: 'Adjust position of promo banners in conflict with HH++',
-            default: false
         },
         scriptSocials: {
             name: 'Adjust position of socials to not overlap with HH++ bars',
@@ -575,15 +572,6 @@
             #contains_all>nav>[rel=content]>div>a>div ic {
                 width: 20px;
                 height: 20px;
-            }
-        `)
-    }
-
-    if (config.scriptPromoBanner) {
-        //Overriding the profile promo banner position to not conflict with the script
-        sheet.insertRule(`
-            body>div>header .promo_profile_discount_text {
-                top: 23px;
             }
         `)
     }
