@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.10
+// @version         0.2.11
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.11: Fixing PoA tick position tweak to respect game-specific colours
 // 0.2.10: Adding tweak to fix girl pose fade on PoA
 // 0.2.9: Removing no longer needed scrollbar tweak for PoA
 // 0.2.8: Adding tweak for contest table points to prevent the medal icon from falling onto another row
@@ -88,18 +89,21 @@
         HH: {
             girl: 'girl',
             homeColor: '#ffb827',
+            darkColor: '#300912',
             tableRow: 'rgba(191,40,90,.25)',
             flower: 'flower'
         },
         GH: {
             girl: 'guy',
             homeColor: '#69daff',
+            darkColor: '#1b0d37',
             tableRow: 'rgba(191,40,90,.25)',
             flower: 'lollipop'
         },
         CxH: {
             girl: 'girl',
             homeColor: 'black',
+            darkColor: '#0f0b1d',
             tableRow: '',
             flower: 'jewel'
         }
@@ -714,7 +718,7 @@
         sheet.insertRule(`
             #events .nc-panel-body .nc-poa-reward-container {
                 padding: 5px;
-                border: 3px solid #300912;
+                border: 3px solid ${gameConfig.darkColor};
             }
         `)
         sheet.insertRule(`
