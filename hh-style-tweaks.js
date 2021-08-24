@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.9
+// @version         0.2.10
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.10: Adding tweak to fix girl pose fade on PoA
 // 0.2.9: Removing no longer needed scrollbar tweak for PoA
 // 0.2.8: Adding tweak for contest table points to prevent the medal icon from falling onto another row
 // 0.2.7: Adding tweak for contest notifications
@@ -180,6 +181,10 @@
         },
         poaBorders: {
             name: 'Green borders on obtained PoA rewards',
+            default: true
+        },
+        poaGirlFade: {
+            name: `Fix ${gameConfig.girl} pose fade on PoA`,
             default: true
         },
         popButtons: {
@@ -716,6 +721,21 @@
             #events .nc-panel-body .nc-poa-reward-container .nc-claimed-reward-check {
                 top: -1px;
                 left: 0px;
+            }
+        `)
+    }
+
+    if (config.poaGirlFade && currentPage.includes('event.html')) {
+        sheet.insertRule(`
+            #events .nc-panel-body #poa-content .girls .girls-container .girl-avatar{
+                -webkit-mask-image: none;
+                mask-image: none;
+            }
+        `)
+        sheet.insertRule(`
+            #events .nc-panel-body #poa-content .girls .girls-container {
+                -webkit-mask-image: linear-gradient(to top,transparent 30%,rgba(0,0,0,.1) 40%,#000 60%);
+                mask-image: linear-gradient(to top,transparent 30%,rgba(0,0,0,.1) 40%,#000 60%);
             }
         `)
     }
