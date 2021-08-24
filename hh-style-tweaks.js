@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.8
+// @version         0.2.9
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.9: Removing no longer needed scrollbar tweak for PoA
 // 0.2.8: Adding tweak for contest table points to prevent the medal icon from falling onto another row
 // 0.2.7: Adding tweak for contest notifications
 // 0.2.6: Adding tweak to hide the new PoP buttons
@@ -167,10 +168,6 @@
         },
         poaLegacy: {
             name: 'Style tweaks for legacy PoA screen',
-            default: true
-        },
-        poaScrollbar: {
-            name: 'Fix scrollbar on new PoA screen',
             default: true
         },
         poaThousands: {
@@ -685,15 +682,6 @@
         sheet.insertRule(`
             body>div>header #blessings-button {
                 margin-top: 6px;
-            }
-        `)
-    }
-
-    if (config.poaScrollbar && currentPage.includes('event.html')) {
-        // Fixing PoA scrollbar being offscreen
-        sheet.insertRule(`
-            .nicescroll-rails {
-                left: unset!important;
             }
         `)
     }
