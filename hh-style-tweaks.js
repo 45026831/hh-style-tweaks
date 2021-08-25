@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.14
+// @version         0.2.15
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.15: Removing leftover debug
 // 0.2.14: Adjusting PoA thousand seperators tweak to cover tooltips as well
 // 0.2.13: Adding tweak to prevent champion girl (most obvious example is Kumiko) from overlapping the girl selection
 // 0.2.12: Removing promo banners tweak. Updates will be done in HH++ itself going forward.
@@ -725,11 +726,7 @@
             }
 
             const tooltipInfo = JSON.parse(toolTipInfoStr)
-            console.log(tooltipInfo)
-
             const {additionalText} = tooltipInfo
-            console.log(additionalText)
-
             tooltipInfo.additionalText = fixNumber(additionalText, ' ')
             $(elem).attr(attr, JSON.stringify(tooltipInfo))
         })
