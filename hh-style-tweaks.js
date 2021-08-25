@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.13
+// @version         0.2.14
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.14: Adjusting PoA thousand seperators tweak to cover tooltips as well
 // 0.2.13: Adding tweak to prevent champion girl (most obvious example is Kumiko) from overlapping the girl selection
 // 0.2.12: Removing promo banners tweak. Updates will be done in HH++ itself going forward.
 // 0.2.11: Fixing PoA tick position tweak to respect game-specific colours
@@ -699,10 +700,8 @@
 
     if (config.poaThousands && currentPage.includes('event.html')) {
         // Adding thousand separators to PoA tasks
-        $('#poa-content .objective .status').each((i, elem) => {
-            const statusText = $(elem).text()
-    
-            const fixedParts = statusText.split(' ').map(part => {
+        const fixNumber = (text, space) => {
+            const fixedParts = text.split(space).map(part => {
                 if (part.trim().match(/^[0-9]+$/)) {
                     const parsed = parseInt(part, 10)
                     part = parsed.toLocaleString(locale)
@@ -710,8 +709,29 @@
     
                 return part
             })
-    
-            $(elem).text(fixedParts.join(' '))
+
+            return fixedParts.join(space)
+        }
+
+        $('#poa-content .objective .status').each((i, elem) => {
+            const statusText = $(elem).text()
+            $(elem).text(fixNumber(statusText, ' '))
+        })
+        $('#nc-poa-tape-rewards .slot').each((i, elem) => {
+            const attr = 'additional-tooltip-info'
+            const toolTipInfoStr = $(elem).attr(attr)
+            if (!toolTipInfoStr) {
+                return
+            }
+
+            const tooltipInfo = JSON.parse(toolTipInfoStr)
+            console.log(tooltipInfo)
+
+            const {additionalText} = tooltipInfo
+            console.log(additionalText)
+
+            tooltipInfo.additionalText = fixNumber(additionalText, ' ')
+            $(elem).attr(attr, JSON.stringify(tooltipInfo))
         })
     }
 
