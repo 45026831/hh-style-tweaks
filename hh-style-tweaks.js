@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.12
+// @version         0.2.13
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.13: Adding tweak to prevent champion girl (most obvious example is Kumiko) from overlapping the girl selection
 // 0.2.12: Removing promo banners tweak. Updates will be done in HH++ itself going forward.
 // 0.2.11: Fixing PoA tick position tweak to respect game-specific colours
 // 0.2.10: Adding tweak to fix girl pose fade on PoA
@@ -130,6 +131,10 @@
         },
         champGirlPower: {
             name: `Fix Champion ${gameConfig.girl} power overflow`,
+            default: true
+        },
+        champGirlOverlap: {
+            name: `Fix Champion ${gameConfig.girl} overlapping ${gameConfig.girl} selection`,
             default: true
         },
         clubTableShadow: {
@@ -600,6 +605,15 @@
         sheet.insertRule(`
             .girl-selection__girl-box [carac=damage] {
                 font-size: 10px;
+            }
+        `)
+    }
+
+    if (config.champGirlOverlap && (currentPage.includes('champions') || currentPage.includes('club-champion'))) {
+        // Reducing font size on champ girls selection
+        sheet.insertRule(`
+            .champions-over__girl-image {
+                right: 285px;
             }
         `)
     }
