@@ -67,6 +67,11 @@
     const LS_CONFIG_NAME = 'HHStyleTweaksConfig'
     const currentPage = location.pathname
 
+    if (!$) {
+        console.log('STYLE TWEAKS WARNING: No jQuery found. Probably an error page. Ending the script here');
+        return;
+    }
+
     const lang = $('html')[0].lang.substring(0,2)
     let locale = 'fr'
     if (lang === 'en') {
