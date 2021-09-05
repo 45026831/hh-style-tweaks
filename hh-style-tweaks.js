@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.15
+// @version         0.2.16
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.16: Adding tweak to adjust the position of the Change team button in league
 // 0.2.15: Removing leftover debug
 // 0.2.14: Adjusting PoA thousand seperators tweak to cover tooltips as well
 // 0.2.13: Adding tweak to prevent champion girl (most obvious example is Kumiko) from overlapping the girl selection
@@ -243,6 +244,10 @@
         contentPointsWidth: {
             name: 'Prevent contest table points overflow',
             default: true
+        },
+        leagueChangeTeamButton: {
+            name: 'Fix positioning of Change team button in league',
+            default: isHH || isGH
         }
     }
 
@@ -848,6 +853,14 @@
         sheet.insertRule(`
             #contests>div>div.right_part>.ranking table tbody tr td:nth-child(3) {
                 width: 125px;
+            }
+        `)
+    }
+
+    if (config.leagueChangeTeamButton && currentPage.includes('tower-of-fame')) {
+        sheet.insertRule(`
+            .player_block .change_team__btn_container {
+                margin-top: 0;
             }
         `)
     }
