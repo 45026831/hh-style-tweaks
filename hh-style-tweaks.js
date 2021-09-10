@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.18
+// @version         0.2.19
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.19: Expanding league change team button tweak to encompass the other items in the left block
 // 0.2.18: Changing script to run at document-body to reduce FOUC
 // 0.2.17: Changing old-to-new buttons tweak to be a full CSS override rather than just swapping out the classes. Done for HH and CxH.
 // 0.2.16: Adding tweak to adjust the position of the Change team button in league
@@ -248,7 +249,7 @@
             default: true
         },
         leagueChangeTeamButton: {
-            name: 'Fix positioning of Change team button in league',
+            name: 'Fix positioning of left block buttons in league',
             default: isHH || isGH
         }
     }
@@ -990,6 +991,11 @@
         sheet.insertRule(`
             .player_block .change_team__btn_container {
                 margin-top: 0;
+            }
+        `)
+        sheet.insertRule(`
+            .player_block .challenge_points .bar-wrap {
+                margin-bottom: -8px;
             }
         `)
     }
