@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.16
+// @version         0.2.17
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.17: Changing old-to-new buttons tweak to be a full CSS override rather than just swapping out the classes. Done for HH and CxH.
 // 0.2.16: Adding tweak to adjust the position of the Change team button in league
 // 0.2.15: Removing leftover debug
 // 0.2.14: Adjusting PoA thousand seperators tweak to cover tooltips as well
@@ -775,9 +776,135 @@
 
     if (config.newButtons) {
         //Replace old buttons with new buttons
-        $('button.blue_text_button').addClass('blue_button_L').removeClass('blue_text_button')
-        $('button.orange_text_button').addClass('orange_button_L').removeClass('orange_text_button')
-        $('button.green_text_button').addClass('green_button_L').removeClass('green_text_button')
+        if (isHH) {
+            sheet.insertRule(`
+                .blue_text_button {
+                    padding: 10px 20px;
+                    color: #fff;
+                    -webkit-border-radius: 7px;
+                    -moz-border-radius: 7px;
+                    border-radius: 7px;
+                    -webkit-box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #6df0ff;
+                    -moz-box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #6df0ff;
+                    box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #6df0ff;
+                    border: 1px solid #000;
+                    background-image: linear-gradient(to top,#008ed5 0,#05719c 100%);
+                    cursor: pointer;
+                    text-decoration: none;
+                    display: inline-block;
+                    -webkit-transition: box-shadow 90ms ease-in-out;
+                    -moz-transition: box-shadow 90ms ease-in-out;
+                    -o-transition: box-shadow 90ms ease-in-out;
+                    transition: box-shadow 90ms ease-in-out;
+                }
+            `)
+            sheet.insertRule(`
+                .blue_text_button[disabled], .orange_text_button[disabled] {
+                    -webkit-box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #b6a6ab!important;
+                    -moz-box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #b6a6ab!important;
+                    box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #b6a6ab!important;
+                    -webkit-border-radius: 7px;
+                    -moz-border-radius: 7px;
+                    border-radius: 7px;
+                    color: #fff;
+                    border: 1px solid #000!important;
+                    background-color: #960530!important;
+                    background-image: linear-gradient(to top,#9f9296 0,#847c85 100%)!important;
+                }
+            `)
+            sheet.insertRule(`
+                .orange_text_button {
+                    padding: 10px 20px;
+                    color: #fff;
+                    -webkit-border-radius: 7px;
+                    -moz-border-radius: 7px;
+                    border-radius: 7px;
+                    -webkit-box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #ffde00,0 0 20px rgba(255,142,0,.45);
+                    -moz-box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #ffde00,0 0 20px rgba(255,142,0,.45);
+                    box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #ffde00,0 0 20px rgba(255,142,0,.45);
+                    border: 1px solid #000;
+                    background-image: linear-gradient(to top,#f90 0,#f70 100%);
+                    cursor: pointer;
+                    text-decoration: none;
+                    display: inline-block;
+                    -webkit-transition: box-shadow 90ms ease-in-out;
+                    -moz-transition: box-shadow 90ms ease-in-out;
+                    -o-transition: box-shadow 90ms ease-in-out;
+                    transition: box-shadow 90ms ease-in-out;
+                }
+            `)
+            sheet.insertRule(`
+                .green_text_button {
+                    padding: 10px 20px;
+                    color: #fff;
+                    -webkit-border-radius: 7px;
+                    -moz-border-radius: 7px;
+                    border-radius: 7px;
+                    -webkit-box-shadow: 0 3px 0 rgba(23,33,7,.6),inset 0 3px 0 #95ed3f;
+                    -moz-box-shadow: 0 3px 0 rgba(23,33,7,.6),inset 0 3px 0 #95ed3f;
+                    box-shadow: 0 3px 0 rgba(23,33,7,.6),inset 0 3px 0 #95ed3f;
+                    border: 1px solid #000;
+                    background-image: linear-gradient(to top,#619f00 0,#570 100%);
+                    cursor: pointer;
+                    text-decoration: none;
+                    display: inline-block;
+                    -webkit-transition: box-shadow 90ms ease-in-out;
+                    -moz-transition: box-shadow 90ms ease-in-out;
+                    -o-transition: box-shadow 90ms ease-in-out;
+                    transition: box-shadow 90ms ease-in-out;
+                }
+            `)
+            sheet.insertRule(`
+                .green_text_button[disabled] {
+                    -webkit-box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #b6a6ab!important;
+                    -moz-box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #b6a6ab!important;
+                    box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #b6a6ab!important;
+                    -webkit-border-radius: 7px;
+                    -moz-border-radius: 7px;
+                    border-radius: 7px;
+                    color: #fff;
+                    border: 1px solid #000!important;
+                    background-color: #960530!important;
+                    background-image: linear-gradient(to top,#9f9296 0,#847c85 100%)!important;
+                }
+            `)
+        } else if (isCxH) {
+            sheet.insertRule(`
+                .green_text_button {
+                    padding: 10px 20px;
+                    color: #fff;
+                    -webkit-border-radius: 7px;
+                    -moz-border-radius: 7px;
+                    border-radius: 7px;
+                    -webkit-box-shadow: 0 3px 0 rgba(23,33,7,.6),inset 0 3px 0 #95ed3f;
+                    -moz-box-shadow: 0 3px 0 rgba(23,33,7,.6),inset 0 3px 0 #95ed3f;
+                    box-shadow: 0 3px 0 rgba(23,33,7,.6),inset 0 3px 0 #95ed3f;
+                    border: 1px solid #000;
+                    background-image: linear-gradient(to top,#619f00 0,#570 100%);
+                    cursor: pointer;
+                    text-decoration: none;
+                    display: inline-block;
+                    -webkit-transition: box-shadow 90ms ease-in-out;
+                    -moz-transition: box-shadow 90ms ease-in-out;
+                    -o-transition: box-shadow 90ms ease-in-out;
+                    transition: box-shadow 90ms ease-in-out;
+                }
+            `)
+            sheet.insertRule(`
+                .green_text_button[disabled] {
+                    -webkit-box-shadow: 0 3px 0 #012a4a,inset 0 3px 0 #b6a6ab!important;
+                    -moz-box-shadow: 0 3px 0 #012a4a,inset 0 3px 0 #b6a6ab!important;
+                    box-shadow: 0 3px 0 #012a4a,inset 0 3px 0 #b6a6ab!important;
+                    -webkit-border-radius: 7px;
+                    -moz-border-radius: 7px;
+                    border-radius: 7px;
+                    color: #fff;
+                    border: 1px solid #000!important;
+                    background-color: #960530!important;
+                    background-image: linear-gradient(to top,#9f9296 0,#847c85 100%)!important;
+                }
+            `)
+        }
     }
 
     if (config.moveSkipButton) {
