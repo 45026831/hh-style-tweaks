@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.17
+// @version         0.2.18
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -10,7 +10,7 @@
 // @match           https://nutaku.gayharem.com/*
 // @match           https://www.comixharem.com/*
 // @match           https://nutaku.comixharem.com/*
-// @run-at          document-end
+// @run-at          document-body
 // @updateURL       https://raw.githubusercontent.com/45026831/hh-style-tweaks/main/hh-style-tweaks.js
 // @downloadURL     https://raw.githubusercontent.com/45026831/hh-style-tweaks/main/hh-style-tweaks.js
 // @grant           none
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.18: Changing script to run at document-body to reduce FOUC
 // 0.2.17: Changing old-to-new buttons tweak to be a full CSS override rather than just swapping out the classes. Done for HH and CxH.
 // 0.2.16: Adding tweak to adjust the position of the Change team button in league
 // 0.2.15: Removing leftover debug
@@ -296,7 +297,9 @@
             configPanel.append(label)
         })
 
-        $('#contains_all').append(configButton).append(configPanel)
+        $(document).ready(() => {
+            $('#contains_all').append(configButton).append(configPanel)
+        })
 
         sheet.insertRule(`
             .styleTweaksCfgBtn {
@@ -309,7 +312,6 @@
                 right: 15px;
                 cursor: pointer;
                 perspective: 1px;
-                box-shadow: 
             }
         `)
         sheet.insertRule(`
@@ -639,7 +641,7 @@
             }
         `)
     }
-    
+
     if (config.scriptSocials && (currentPage.includes('home'))) {
         sheet.insertRule(`
             .social {
@@ -660,7 +662,7 @@
                 text-shadow: 1px 1px 0 #057,-1px 1px 0 #057,-1px -1px 0 #057,1px -1px 0 #057,3px 1px 5px #000;
             }
         `)
-    
+
         sheet.insertRule(`
             #PoPTimer .white_text, #BoosterTimer .white_text {
                 top: -2px;
@@ -668,13 +670,13 @@
                 text-shadow: 1px 1px 0 #057,-1px 1px 0 #057,-1px -1px 0 #057,1px -1px 0 #057,3px 1px 5px #000;
             }
         `)
-    
+
         sheet.insertRule(`
             #PoPTimer [rel=pop_count_txt], #BoosterTimer [rel=booster_count_txt] {
                 color: inherit !important;
             }
         `)
-    
+
         sheet.insertRule(`
             #PoPTimer .popTooltip, #BoosterTimer .boosterTooltip {
                 text-shadow: none;
@@ -718,7 +720,7 @@
                     const parsed = parseInt(part, 10)
                     part = parsed.toLocaleString(locale)
                 }
-    
+
                 return part
             })
 
