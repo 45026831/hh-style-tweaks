@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.19
+// @version         0.2.20
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.20: Adding new button colours for GH
 // 0.2.19: Expanding league change team button tweak to encompass the other items in the left block
 // 0.2.18: Changing script to run at document-body to reduce FOUC
 // 0.2.17: Changing old-to-new buttons tweak to be a full CSS override rather than just swapping out the classes. Done for HH and CxH.
@@ -779,7 +780,32 @@
 
     if (config.newButtons) {
         //Replace old buttons with new buttons
-        if (isHH) {
+        if (isHH || isGH) {
+            let colors
+            if (isHH) {
+                colors = {
+                    orange: {
+                        start: '#f90',
+                        end: '#f70'
+                    },
+                    blue: {
+                        start: '#008ed5',
+                        end: '#05719c'
+                    }
+                }
+            }
+            if (isGH) {
+                colors = {
+                    orange: {
+                        start: '#f90',
+                        end: '#f70'
+                    },
+                    blue: {
+                        start: '#008ed5',
+                        end: '#05719c'
+                    }
+                }
+            }
             sheet.insertRule(`
                 .blue_text_button {
                     padding: 10px 20px;
@@ -791,7 +817,7 @@
                     -moz-box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #6df0ff;
                     box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #6df0ff;
                     border: 1px solid #000;
-                    background-image: linear-gradient(to top,#008ed5 0,#05719c 100%);
+                    background-image: linear-gradient(to top,${colors.blue.start} 0,${colors.blue.end} 100%);
                     cursor: pointer;
                     text-decoration: none;
                     display: inline-block;
@@ -826,7 +852,7 @@
                     -moz-box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #ffde00,0 0 20px rgba(255,142,0,.45);
                     box-shadow: 0 3px 0 rgba(13,22,25,.6),inset 0 3px 0 #ffde00,0 0 20px rgba(255,142,0,.45);
                     border: 1px solid #000;
-                    background-image: linear-gradient(to top,#f90 0,#f70 100%);
+                    background-image: linear-gradient(to top,${colors.orange.start} 0,${colors.orange.end} 100%);
                     cursor: pointer;
                     text-decoration: none;
                     display: inline-block;
