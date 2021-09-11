@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.21
+// @version         0.2.22
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.22: Fixing GH new button colours (actually adding them this time)
 // 0.2.21: Adjusting league button tweak to acount for larger x15 button
 // 0.2.20: Adding new button colours for GH
 // 0.2.19: Expanding league change team button tweak to encompass the other items in the left block
@@ -798,12 +799,12 @@
             if (isGH) {
                 colors = {
                     orange: {
-                        start: '#f90',
-                        end: '#f70'
+                        start: '#fdda00',
+                        end: '#bf8d00'
                     },
                     blue: {
-                        start: '#008ed5',
-                        end: '#05719c'
+                        start: '#4bb',
+                        end: '#077'
                     }
                 }
             }
