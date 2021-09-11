@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.20
+// @version         0.2.21
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.21: Adjusting league button tweak to acount for larger x15 button
 // 0.2.20: Adding new button colours for GH
 // 0.2.19: Expanding league change team button tweak to encompass the other items in the left block
 // 0.2.18: Changing script to run at document-body to reduce FOUC
@@ -1021,7 +1022,7 @@
         `)
         sheet.insertRule(`
             .player_block .challenge_points .bar-wrap {
-                margin-bottom: -8px;
+                margin-bottom: 0px;
             }
         `)
     }
