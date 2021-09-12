@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.23
+// @version         0.2.24
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.24: Adding tweak to fix monthly card text, courtesy of KominoStyle
 // 0.2.23: Adding tweak for compact PoP thumbs in the list
 // 0.2.22: Fixing GH new button colours (actually adding them this time)
 // 0.2.21: Adjusting league button tweak to acount for larger x15 button
@@ -268,6 +269,10 @@
         compactPops: {
             name: 'Compact PoPs',
             default: isHH || isGH
+        },
+        monthlyCardText: {
+            name: 'Fix monthly card text',
+            default: true
         }
     }
 
@@ -1181,5 +1186,24 @@
                 }
             `)
         })
+    }
+
+    if (config.monthlyCardText) {
+        sheet.insertRule(`
+            #popups #no_HC .monthly_card .product-info {
+                line-height: 19px;
+            }
+        `)
+        sheet.insertRule(`
+            #popups #no_HC .monthly_card .product-info [cur=hard_currency]::before {
+                max-width: 5%;
+            }
+        `)
+        sheet.insertRule(`
+            #popups #no_HC .monthly_card .product-info [cur=energy_kiss]::before {
+                max-width: 6%;
+                height: 19px;
+            }
+        `)
     }
 })()
