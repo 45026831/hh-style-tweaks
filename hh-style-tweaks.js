@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.22
+// @version         0.2.23
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.23: Adding tweak for compact PoP thumbs in the list
 // 0.2.22: Fixing GH new button colours (actually adding them this time)
 // 0.2.21: Adjusting league button tweak to acount for larger x15 button
 // 0.2.20: Adding new button colours for GH
@@ -86,12 +87,6 @@
     }
 
     // Game detection
-    const isHH = [
-        'www.hentaiheroes.com',
-        'nutaku.haremheroes.com',
-        'eroges.hentaiheroes.com',
-        'thrix.hentaiheroes.com'
-    ].includes(location.host)
     const isGH = [
         'www.gayharem.com',
         'nutaku.gayharem.com'
@@ -100,6 +95,17 @@
         'www.comixharem.com',
         'nutaku.comixharem.com'
     ].includes(location.host)
+    const isHH = !(isGH || isCxH)
+
+    const CDNs = {
+        'nutaku.haremheroes.com': 'hh.hh-content.com',
+        'www.hentaiheroes.com': 'hh2.hh-content.com',
+        'www.comixharem.com': 'ch.hh-content.com',
+        'nutaku.comixharem.com': 'ch.hh-content.com',
+        'www.gayharem.com': 'gh1.hh-content.com',
+        'nutaku.gayharem.com': 'gh.hh-content.com'
+    }
+    const cdnHost = CDNs[location.host] || 'hh.hh-content.com'
 
     const gameConfigs = {
         HH: {
@@ -125,6 +131,10 @@
         }
     }
     const gameConfig = isGH ? gameConfigs.GH : isCxH ? gameConfigs.CxH : gameConfigs.HH
+
+    const HC = 1;
+    const CH = 2;
+    const KH = 3;
 
     // Define CSS
     var sheet = (function() {
@@ -253,6 +263,10 @@
         },
         leagueChangeTeamButton: {
             name: 'Fix positioning of left block buttons in league',
+            default: isHH || isGH
+        },
+        compactPops: {
+            name: 'Compact PoPs',
             default: isHH || isGH
         }
     }
@@ -1026,5 +1040,146 @@
                 margin-bottom: 0px;
             }
         `)
+    }
+
+    if (config.compactPops && currentPage.includes('activities')) {
+        const pops = [
+            {id: 1, carac: HC, reward: 'shard'},
+            {id: 2, carac: KH, reward: 'shard'},
+            {id: 3, carac: CH, reward: 'shard'},
+            {id: 4, carac: HC, reward: 'ymen'},
+            {id: 5, carac: CH, reward: 'ymen'},
+            {id: 6, carac: KH, reward: 'ymen'},
+            {id: 7, carac: HC, reward: 'koban'},
+            {id: 8, carac: CH, reward: 'koban'},
+            {id: 9, carac: KH, reward: 'koban'},
+            {id: 10, carac: HC, reward: '?'},
+            {id: 11, carac: CH, reward: '?'},
+            {id: 12, carac: KH, reward: '?'},
+            {id: 13, carac: HC, reward: 'orb'},
+            {id: 14, carac: CH, reward: 'orb'},
+            {id: 15, carac: KH, reward: 'orb'},
+            {id: 16, carac: HC, reward: '?'},
+            {id: 17, carac: CH, reward: '?'},
+            {id: 18, carac: KH, reward: '?'},
+            {id: 19, carac: HC, reward: 'ticket'},
+            {id: 20, carac: CH, reward: 'ticket'},
+            {id: 21, carac: KH, reward: 'ticket'},
+        ]
+        const hcPops = pops.filter(({carac})=>carac===HC)
+        const chPops = pops.filter(({carac})=>carac===CH)
+        const khPops = pops.filter(({carac})=>carac===KH)
+        const caracPops = [
+            {pops: hcPops, icon: `https://${cdnHost}/caracs/hardcore.png`},
+            {pops: chPops, icon: `https://${cdnHost}/caracs/charm.png`},
+            {pops: khPops, icon: `https://${cdnHost}/caracs/knowhow.png`}
+        ]
+        const shardPops = pops.filter(({reward})=>reward==='shard')
+        const ymenPops = pops.filter(({reward})=>reward==='ymen')
+        const kobanPops = pops.filter(({reward})=>reward==='koban')
+        const orbPops = pops.filter(({reward})=>reward==='orb')
+        const ticketPops = pops.filter(({reward})=>reward==='ticket')
+        const rewardPops = [
+            {pops: shardPops, icon: `https://${cdnHost}/shards.png`},
+            {pops: ymenPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_soft_currency.png`},
+            {pops: kobanPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_hard_currency.png`},
+            {pops: orbPops, icon: `https://${cdnHost}/pachinko/o_e1.png`},
+            {pops: ticketPops, icon: `https://${cdnHost}/pictures/design/champion_ticket.png`},
+        ]
+
+        sheet.insertRule(`
+            .pop_thumb>img, .pop_thumb_title {
+                display:none;
+            }
+        `)
+        sheet.insertRule(`
+            .pop_thumb_progress_bar {
+                margin-top: 25px;
+            }
+        `)
+        sheet.insertRule(`
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb>.pop_thumb_space {
+                height: 60px;
+            }
+        `)
+        sheet.insertRule(`
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb>.pop_thumb_level {
+                top: 0px;
+            }
+        `)
+        sheet.insertRule(`
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb_expanded {
+                height: 101px;
+            }
+        `)
+        sheet.insertRule(`
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb_active {
+                height: 101px;
+            }
+        `)
+        sheet.insertRule(`
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb_greyed_out {
+                height: 101px;
+            }
+        `)
+        sheet.insertRule(`
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb_greyed_out .pop_thumb_title {
+                display: block;
+                margin-top: 0px;
+            }
+        `)
+        sheet.insertRule(`
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb_active>button {
+                margin-top: 60px;
+            }
+        `)
+        sheet.insertRule(`
+            #pop .pop_list .pop_list_scrolling_area .collect_notif {
+                margin-top: -88px;
+                margin-left: 74px;
+            }
+        `)
+
+        sheet.insertRule(`
+            .pop_thumb:before {
+                content: ' ';
+                display: block;
+                position: relative;
+                height: 18px;
+                width: 18px;
+                background-size: cover;
+                top: 2px;
+                left: 2px;
+                margin-bottom: -18px;
+            }
+        `)
+        caracPops.forEach(({pops, icon}) => {
+            sheet.insertRule(`
+                ${pops.map(({id}) => `[pop_id="${id}"]:before`).join(',')} {
+                    background: url(${icon});
+                }
+            `)
+        })
+
+        sheet.insertRule(`
+            .pop_thumb:after {
+                content: ' ';
+                display: block;
+                position: relative;
+                height: 18px;
+                width: 18px;
+                background-size: cover;
+                top: -92px;
+                left: 22px;
+                margin-bottom: -18px;
+            }
+        `)
+        rewardPops.forEach(({pops, icon}) => {
+            sheet.insertRule(`
+                ${pops.map(({id}) => `[pop_id="${id}"]:after`).join(',')} {
+                    background: url(${icon});
+                }
+            `)
+        })
     }
 })()
