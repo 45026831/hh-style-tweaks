@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.24
+// @version         0.2.25
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.25: Updating compact PoPs tweak with new temporary PoPs
 // 0.2.24: Adding tweak to fix monthly card text, courtesy of KominoStyle
 // 0.2.23: Adding tweak for compact PoP thumbs in the list
 // 0.2.22: Fixing GH new button colours (actually adding them this time)
@@ -1058,18 +1059,21 @@
             {id: 7, carac: HC, reward: 'koban'},
             {id: 8, carac: CH, reward: 'koban'},
             {id: 9, carac: KH, reward: 'koban'},
-            {id: 10, carac: HC, reward: '?'},
-            {id: 11, carac: CH, reward: '?'},
-            {id: 12, carac: KH, reward: '?'},
+            {id: 10, carac: HC, reward: 'book'},
+            {id: 11, carac: CH, reward: 'book'},
+            {id: 12, carac: KH, reward: 'book'},
             {id: 13, carac: HC, reward: 'orb'},
             {id: 14, carac: CH, reward: 'orb'},
             {id: 15, carac: KH, reward: 'orb'},
-            {id: 16, carac: HC, reward: '?'},
-            {id: 17, carac: CH, reward: '?'},
-            {id: 18, carac: KH, reward: '?'},
+            {id: 16, carac: HC, reward: 'booster'},
+            {id: 17, carac: CH, reward: 'booster'},
+            {id: 18, carac: KH, reward: 'booster'},
             {id: 19, carac: HC, reward: 'ticket'},
             {id: 20, carac: CH, reward: 'ticket'},
             {id: 21, carac: KH, reward: 'ticket'},
+            {id: 22, carac: HC, reward: 'gift'},
+            {id: 23, carac: CH, reward: 'gift'},
+            {id: 24, carac: KH, reward: 'gift'},
         ]
         const hcPops = pops.filter(({carac})=>carac===HC)
         const chPops = pops.filter(({carac})=>carac===CH)
@@ -1082,14 +1086,20 @@
         const shardPops = pops.filter(({reward})=>reward==='shard')
         const ymenPops = pops.filter(({reward})=>reward==='ymen')
         const kobanPops = pops.filter(({reward})=>reward==='koban')
+        const bookPops = pops.filter(({reward})=>reward==='book')
         const orbPops = pops.filter(({reward})=>reward==='orb')
+        const boosterPops = pops.filter(({reward})=>reward==='booster')
         const ticketPops = pops.filter(({reward})=>reward==='ticket')
+        const giftPops = pops.filter(({reward})=>reward==='gift')
         const rewardPops = [
             {pops: shardPops, icon: `https://${cdnHost}/shards.png`},
             {pops: ymenPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_soft_currency.png`},
             {pops: kobanPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_hard_currency.png`},
+            {pops: bookPops, icon: `https://${cdnHost}/pictures/items/XP4.png`},
             {pops: orbPops, icon: `https://${cdnHost}/pachinko/o_e1.png`},
+            {pops: boosterPops, icon: `https://${cdnHost}/pictures/items/B3.png`},
             {pops: ticketPops, icon: `https://${cdnHost}/pictures/design/champion_ticket.png`},
+            {pops: giftPops, icon: `https://${cdnHost}/pictures/items/K4.png`},
         ]
 
         sheet.insertRule(`
