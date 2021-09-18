@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.26
+// @version         0.2.27
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.27: Adding border colours to some of the compact pops to help distinguish them more
 // 0.2.26: Updating the button styles to include purple
 // 0.2.25: Updating compact PoPs tweak with new temporary PoPs
 // 0.2.24: Adding tweak to fix monthly card text, courtesy of KominoStyle
@@ -1149,11 +1150,11 @@
         const ticketPops = pops.filter(({reward})=>reward==='ticket')
         const giftPops = pops.filter(({reward})=>reward==='gift')
         const rewardPops = [
-            {pops: shardPops, icon: `https://${cdnHost}/shards.png`},
-            {pops: ymenPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_soft_currency.png`},
-            {pops: kobanPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_hard_currency.png`},
+            {pops: shardPops, icon: `https://${cdnHost}/shards.png`, border: '#d561e6'},
+            {pops: ymenPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_soft_currency.png`, border: '#8d8e9f'},
+            {pops: kobanPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_hard_currency.png`, border: '#ffb244'},
             {pops: bookPops, icon: `https://${cdnHost}/pictures/items/XP4.png`},
-            {pops: orbPops, icon: `https://${cdnHost}/pachinko/o_e1.png`},
+            {pops: orbPops, icon: `https://${cdnHost}/pachinko/o_e1.png`, border: '#ec0039'},
             {pops: boosterPops, icon: `https://${cdnHost}/pictures/items/B3.png`},
             {pops: ticketPops, icon: `https://${cdnHost}/pictures/design/champion_ticket.png`},
             {pops: giftPops, icon: `https://${cdnHost}/pictures/items/K4.png`},
@@ -1180,8 +1181,15 @@
             }
         `)
         sheet.insertRule(`
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb_selected .pop_thumb_progress_bar,
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb>.pop_thumb_progress_bar {
+                background-color: unset;
+            }
+        `)
+        sheet.insertRule(`
             #pop .pop_list .pop_list_scrolling_area .pop_thumb_expanded {
                 height: 101px;
+                box-shadow: 0px 0px 18px black inset;
             }
         `)
         sheet.insertRule(`
@@ -1246,12 +1254,19 @@
                 margin-bottom: -18px;
             }
         `)
-        rewardPops.forEach(({pops, icon}) => {
+        rewardPops.forEach(({pops, icon, border}) => {
             sheet.insertRule(`
                 ${pops.map(({id}) => `[pop_id="${id}"]:after`).join(',')} {
                     background: url(${icon});
                 }
             `)
+            if (border) {
+                sheet.insertRule(`
+                    ${pops.map(({id}) => `#pop .pop_list .pop_list_scrolling_area .pop_thumb[pop_id="${id}"]`).join(',')} {
+                        border-color: ${border};
+                    }
+                `)
+            }
         })
     }
 
