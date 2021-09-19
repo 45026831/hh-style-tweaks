@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.27
+// @version         0.2.28
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.28: Changing config to 3 columns to reduce risk of running offscreen
 // 0.2.27: Adding border colours to some of the compact pops to help distinguish them more
 // 0.2.26: Updating the button styles to include purple
 // 0.2.25: Updating compact PoPs tweak with new temporary PoPs
@@ -372,13 +373,13 @@
         sheet.insertRule(`
             .styleTweaksCfgPanel {
                 position: absolute;
-                width: 480px;
+                width: 600px;
                 top: 125px;
                 right: 50px;
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                 font-size: 11px;
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr 1fr 1fr;
                 grid-column-gap: 5px;
                 grid-row-gap: 5px;
                 padding: 5px;
