@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.28
+// @version         0.2.29
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.29: Improving styles on compact PoPs
 // 0.2.28: Changing config to 3 columns to reduce risk of running offscreen
 // 0.2.27: Adding border colours to some of the compact pops to help distinguish them more
 // 0.2.26: Updating the button styles to include purple
@@ -1151,10 +1152,10 @@
         const ticketPops = pops.filter(({reward})=>reward==='ticket')
         const giftPops = pops.filter(({reward})=>reward==='gift')
         const rewardPops = [
-            {pops: shardPops, icon: `https://${cdnHost}/shards.png`, border: '#d561e6'},
+            {pops: shardPops, icon: `https://${cdnHost}/shards.png`, border: '#d561e6', bgSize: '28px 28px !important'},
             {pops: ymenPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_soft_currency.png`, border: '#8d8e9f'},
             {pops: kobanPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_hard_currency.png`, border: '#ffb244'},
-            {pops: bookPops, icon: `https://${cdnHost}/pictures/items/XP4.png`},
+            {pops: bookPops, icon: `https://${cdnHost}/pictures/items/XP3.png`},
             {pops: orbPops, icon: `https://${cdnHost}/pachinko/o_e1.png`, border: '#ec0039'},
             {pops: boosterPops, icon: `https://${cdnHost}/pictures/items/B3.png`},
             {pops: ticketPops, icon: `https://${cdnHost}/pictures/design/champion_ticket.png`},
@@ -1162,8 +1163,22 @@
         ]
 
         sheet.insertRule(`
-            .pop_thumb>img, .pop_thumb_title {
+            .pop_thumb_title {
                 display:none;
+            }
+        `)
+        sheet.insertRule(`
+            .pop_thumb>img {
+                border-radius: 0;
+                position: relative;
+                top: -27px;
+                z-index: -1;
+                float: left;
+            }
+        `)
+        sheet.insertRule(`
+            .pop_thumb.pop_thumb_greyed_out>img {
+                top: 0px;
             }
         `)
         sheet.insertRule(`
@@ -1174,33 +1189,44 @@
         sheet.insertRule(`
             #pop .pop_list .pop_list_scrolling_area .pop_thumb>.pop_thumb_space {
                 height: 60px;
+                display: block !important;
+            }
+        `)
+        sheet.insertRule(`
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb.pop_thumb_active[status=pending_reward] > .pop_thumb_space {
+                top: -137px;
+                position: relative;
             }
         `)
         sheet.insertRule(`
             #pop .pop_list .pop_list_scrolling_area .pop_thumb>.pop_thumb_level {
-                top: 0px;
+                top: -102px;
             }
         `)
         sheet.insertRule(`
             #pop .pop_list .pop_list_scrolling_area .pop_thumb_selected .pop_thumb_progress_bar,
             #pop .pop_list .pop_list_scrolling_area .pop_thumb>.pop_thumb_progress_bar {
                 background-color: unset;
+                text-shadow: rgb(0, 0, 0) 1px 1px 0px, rgb(0, 0, 0) -1px 1px 0px, rgb(0, 0, 0) -1px -1px 0px, rgb(0, 0, 0) 1px -1px 0px;
             }
         `)
         sheet.insertRule(`
-            #pop .pop_list .pop_list_scrolling_area .pop_thumb_expanded {
-                height: 101px;
-                box-shadow: 0px 0px 18px black inset;
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb_selected {
+                box-shadow: 0px 0px 7px 1px;
+                color: #f90;
             }
         `)
         sheet.insertRule(`
-            #pop .pop_list .pop_list_scrolling_area .pop_thumb_active {
-                height: 101px;
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb_expanded,
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb_active,
+            #pop .pop_list .pop_list_scrolling_area .pop_thumb_greyed_out {
+                height: 99px;
+                background: linear-gradient(0deg, #00000087, transparent);
             }
         `)
         sheet.insertRule(`
             #pop .pop_list .pop_list_scrolling_area .pop_thumb_greyed_out {
-                height: 101px;
+                height: 99px;
             }
         `)
         sheet.insertRule(`
@@ -1211,7 +1237,8 @@
         `)
         sheet.insertRule(`
             #pop .pop_list .pop_list_scrolling_area .pop_thumb_active>button {
-                margin-top: 60px;
+                position: relative;
+                top: -44px;
             }
         `)
         sheet.insertRule(`
@@ -1220,51 +1247,65 @@
                 margin-left: 74px;
             }
         `)
+        sheet.insertRule(`
+            [rel=pop_thumb_info] {
+                position: relative;
+                top: -44px;
+            }
+        `)
 
         sheet.insertRule(`
-            .pop_thumb:before {
+            .pop_thumb>.pop_thumb_space:before {
                 content: ' ';
                 display: block;
                 position: relative;
-                height: 18px;
-                width: 18px;
+                height: 24px;
+                width: 24px;
                 background-size: cover;
-                top: 2px;
-                left: 2px;
-                margin-bottom: -18px;
+                top: 0px;
+                left: 0px;
+                margin-bottom: -24px;
+                background-color: #290f16;
+                border: 2px solid #290f16;
             }
         `)
         caracPops.forEach(({pops, icon}) => {
             sheet.insertRule(`
-                ${pops.map(({id}) => `[pop_id="${id}"]:before`).join(',')} {
+                ${pops.map(({id}) => `[pop_id="${id}"]>.pop_thumb_space:before`).join(',')} {
                     background: url(${icon});
                 }
             `)
         })
 
         sheet.insertRule(`
-            .pop_thumb:after {
+            .pop_thumb>.pop_thumb_space:after {
                 content: ' ';
                 display: block;
                 position: relative;
-                height: 18px;
-                width: 18px;
+                height: 24px;
+                width: 24px;
                 background-size: cover;
-                top: -92px;
-                left: 22px;
-                margin-bottom: -18px;
+                background-position: center;
+                top: 0px;
+                left: 24px;
+                margin-bottom: -24px;
+                background-color: #290f16;
+                border: 2px solid #290f16;
+                border-bottom-right-radius: 5px;
             }
         `)
-        rewardPops.forEach(({pops, icon, border}) => {
+        rewardPops.forEach(({pops, icon, border, bgSize}) => {
             sheet.insertRule(`
-                ${pops.map(({id}) => `[pop_id="${id}"]:after`).join(',')} {
+                ${pops.map(({id}) => `[pop_id="${id}"]>.pop_thumb_space:after`).join(',')} {
                     background: url(${icon});
+                    ${bgSize ? `background-size: ${bgSize};`: ''}
                 }
             `)
             if (border) {
                 sheet.insertRule(`
                     ${pops.map(({id}) => `#pop .pop_list .pop_list_scrolling_area .pop_thumb[pop_id="${id}"]`).join(',')} {
                         border-color: ${border};
+                        color: ${border};
                     }
                 `)
             }
