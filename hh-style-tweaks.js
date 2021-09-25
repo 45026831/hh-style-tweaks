@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.29
+// @version         0.2.30
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.30: Removing legacy PoA tweaks as the page is now gone.
 // 0.2.29: Improving styles on compact PoPs
 // 0.2.28: Changing config to 3 columns to reduce risk of running offscreen
 // 0.2.27: Adding border colours to some of the compact pops to help distinguish them more
@@ -205,10 +206,6 @@
         },
         newButtons: {
             name: 'Replace remaining old-style buttons',
-            default: true
-        },
-        poaLegacy: {
-            name: 'Style tweaks for legacy PoA screen',
             default: true
         },
         poaThousands: {
@@ -509,30 +506,6 @@
                 animation:none !important;
                 transform:none;
                 -webkit-transform:none;
-            }
-        `)
-    }
-
-    if (config.poaLegacy && currentPage.includes('path-of-attraction')) {
-        // PoA step numbers
-        sheet.insertRule(`
-            .poa.container .free-block .objective-counter {
-                right: -28px;
-                width: 56px;
-                transform: rotate(90deg);
-            }
-        `)
-        sheet.insertRule(`
-            .poa.container .free-block .objective-counter span {
-                width: 48px;
-                margin: 0.75px 0 2px 1px;
-            }
-        `)
-
-        // PoA step progress corner rounding
-        sheet.insertRule(`
-            .poa.container .free-block .objective-progress {
-                border-radius: 0px 4px 4px 0px;
             }
         `)
     }
