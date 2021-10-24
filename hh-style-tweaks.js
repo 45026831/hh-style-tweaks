@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.31
+// @version         0.2.32
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.32: Removing PoA thousands seperators tweak as this is now in the base game
 // 0.2.31: Adding support for element icons replacing class icons (HH++)
 // 0.2.30: Removing legacy PoA tweaks as the page is now gone.
 // 0.2.29: Improving styles on compact PoPs
@@ -207,10 +208,6 @@
         },
         newButtons: {
             name: 'Replace remaining old-style buttons',
-            default: true
-        },
-        poaThousands: {
-            name: 'Add thousands seperators for PoA tasks',
             default: true
         },
         poaTicks: {
@@ -727,39 +724,6 @@
                 margin-top: 6px;
             }
         `)
-    }
-
-    if (config.poaThousands && currentPage.includes('event.html')) {
-        // Adding thousand separators to PoA tasks
-        const fixNumber = (text, space) => {
-            const fixedParts = text.split(space).map(part => {
-                if (part.trim().match(/^[0-9]+$/)) {
-                    const parsed = parseInt(part, 10)
-                    part = parsed.toLocaleString(locale)
-                }
-
-                return part
-            })
-
-            return fixedParts.join(space)
-        }
-
-        $('#poa-content .objective .status').each((i, elem) => {
-            const statusText = $(elem).text()
-            $(elem).text(fixNumber(statusText, ' '))
-        })
-        $('#nc-poa-tape-rewards .slot').each((i, elem) => {
-            const attr = 'additional-tooltip-info'
-            const toolTipInfoStr = $(elem).attr(attr)
-            if (!toolTipInfoStr) {
-                return
-            }
-
-            const tooltipInfo = JSON.parse(toolTipInfoStr)
-            const {additionalText} = tooltipInfo
-            tooltipInfo.additionalText = fixNumber(additionalText, ' ')
-            $(elem).attr(attr, JSON.stringify(tooltipInfo))
-        })
     }
 
     if (config.poaTicks && currentPage.includes('event.html')) {
