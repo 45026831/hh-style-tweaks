@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.32
+// @version         0.2.33
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.33: Adjusting league left block positioning after change in game.
 // 0.2.32: Removing PoA thousands seperators tweak as this is now in the base game
 // 0.2.31: Adding support for element icons replacing class icons (HH++)
 // 0.2.30: Removing legacy PoA tweaks as the page is now gone.
@@ -1057,6 +1058,11 @@
         sheet.insertRule(`
             .player_block .challenge_points .bar-wrap {
                 margin-bottom: 0px;
+            }
+        `)
+        sheet.insertRule(`
+            #leagues_left .multiple-battles {
+                margin-top: 6px;
             }
         `)
     }
