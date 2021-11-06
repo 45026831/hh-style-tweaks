@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.33
+// @version         0.2.34
 // @match           https://www.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://eroges.hentaiheroes.com/*
@@ -20,6 +20,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.34: Adding league table stripe colour for CxH, fixing bug on CxH with HH++ individual scores overflowing the cell
 // 0.2.33: Adjusting league left block positioning after change in game.
 // 0.2.32: Removing PoA thousands seperators tweak as this is now in the base game
 // 0.2.31: Adding support for element icons replacing class icons (HH++)
@@ -136,7 +137,7 @@
             girl: 'girl',
             homeColor: 'black',
             darkColor: '#0f0b1d',
-            tableRow: '',
+            tableRow: 'rgba(36,88,255,.25)',
             flower: 'jewel'
         }
     }
@@ -482,6 +483,11 @@
             .lead_table table tbody tr>td:first-child .promotion {
                 margin-right: 26px;
                 height: 16px;
+            }
+        `)
+        sheet.insertRule(`
+            #leagues_middle .lead_table table tbody tr td:nth-child(4), #leagues_middle .lead_table table thead th:nth-child(4), #leagues_middle .use-lead-table table tbody tr td:nth-child(4), #leagues_middle .use-lead-table table thead th:nth-child(4) {
+                width: 75px;
             }
         `)
     }
