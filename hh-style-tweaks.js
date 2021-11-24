@@ -1,15 +1,11 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.34
-// @match           https://www.hentaiheroes.com/*
+// @version         0.2.35
+// @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
-// @match           https://eroges.hentaiheroes.com/*
-// @match           https://thrix.hentaiheroes.com/*
-// @match           https://www.gayharem.com/*
-// @match           https://nutaku.gayharem.com/*
-// @match           https://www.comixharem.com/*
-// @match           https://nutaku.comixharem.com/*
+// @match           https://*.gayharem.com/*
+// @match           https://*.comixharem.com/*
 // @run-at          document-body
 // @updateURL       https://raw.githubusercontent.com/45026831/hh-style-tweaks/main/hh-style-tweaks.js
 // @downloadURL     https://raw.githubusercontent.com/45026831/hh-style-tweaks/main/hh-style-tweaks.js
@@ -20,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.35: Recolouring compact PoPs for gem (secondary) rewards
 // 0.2.34: Adding league table stripe colour for CxH, fixing bug on CxH with HH++ individual scores overflowing the cell
 // 0.2.33: Adjusting league left block positioning after change in game.
 // 0.2.32: Removing PoA thousands seperators tweak as this is now in the base game
@@ -1084,9 +1081,9 @@
             {id: 7, carac: HC, reward: 'koban'},
             {id: 8, carac: CH, reward: 'koban'},
             {id: 9, carac: KH, reward: 'koban'},
-            {id: 10, carac: HC, reward: 'book'},
-            {id: 11, carac: CH, reward: 'book'},
-            {id: 12, carac: KH, reward: 'book'},
+            {id: 10, carac: HC, reward: 'gem'},
+            {id: 11, carac: CH, reward: 'gem'},
+            {id: 12, carac: KH, reward: 'gem'},
             {id: 13, carac: HC, reward: 'orb'},
             {id: 14, carac: CH, reward: 'orb'},
             {id: 15, carac: KH, reward: 'orb'},
@@ -1111,20 +1108,20 @@
         const shardPops = pops.filter(({reward})=>reward==='shard')
         const ymenPops = pops.filter(({reward})=>reward==='ymen')
         const kobanPops = pops.filter(({reward})=>reward==='koban')
-        const bookPops = pops.filter(({reward})=>reward==='book')
+        const gemPops = pops.filter(({reward})=>reward==='gem')
         const orbPops = pops.filter(({reward})=>reward==='orb')
         const boosterPops = pops.filter(({reward})=>reward==='booster')
         const ticketPops = pops.filter(({reward})=>reward==='ticket')
         const giftPops = pops.filter(({reward})=>reward==='gift')
         const rewardPops = [
             {pops: shardPops, icon: `https://${cdnHost}/shards.png`, border: '#d561e6', bgSize: '28px 28px !important'},
-            {pops: ymenPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_soft_currency.png`, border: '#8d8e9f'},
-            {pops: kobanPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_hard_currency.png`, border: '#ffb244'},
-            {pops: bookPops, icon: `https://${cdnHost}/pictures/items/XP3.png`},
-            {pops: orbPops, icon: `https://${cdnHost}/pachinko/o_e1.png`, border: '#ec0039'},
-            {pops: boosterPops, icon: `https://${cdnHost}/pictures/items/B3.png`},
-            {pops: ticketPops, icon: `https://${cdnHost}/pictures/design/champion_ticket.png`},
-            {pops: giftPops, icon: `https://${cdnHost}/pictures/items/K4.png`},
+            {pops: ymenPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_soft_currency.png`, border: '#565656'},
+            {pops: kobanPops, icon: `https://${cdnHost}/pictures/design/ic_topbar_hard_currency.png`, border: '#d9d9d9'},
+            {pops: gemPops, icon: `https://${cdnHost}/pictures/design/gems/psychic.png`, border: '#1ddf3e'},
+            {pops: orbPops, icon: `https://${cdnHost}/pachinko/o_e1.png`, border: '#0155d1'},
+            {pops: boosterPops, icon: `https://${cdnHost}/pictures/items/B3.png`, border: '#ec0039'},
+            {pops: ticketPops, icon: `https://${cdnHost}/pictures/design/champion_ticket.png`, border: '#e95a06'},
+            {pops: giftPops, icon: `https://${cdnHost}/pictures/items/K4.png`, border: '#ffb244'},
         ]
 
         sheet.insertRule(`
