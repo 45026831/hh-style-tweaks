@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.35
+// @version         0.2.36
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.36: Adjusting monthly card text again to account for gems.
 // 0.2.35: Recolouring compact PoPs for gem (secondary) rewards
 // 0.2.34: Adding league table stripe colour for CxH, fixing bug on CxH with HH++ individual scores overflowing the cell
 // 0.2.33: Adjusting league left block positioning after change in game.
@@ -1289,6 +1290,17 @@
             #popups #no_HC .monthly_card .product-info [cur=energy_kiss]::before {
                 max-width: 6%;
                 height: 19px;
+            }
+        `)
+        sheet.insertRule(`
+            #popups #no_HC .monthly_card .product-info [cur=g_a]::before {
+                max-width: 6%;
+                height: 19px;
+            }
+        `)
+        sheet.insertRule(`
+            #popups #no_HC .monthly_card .product-normal-price {
+                bottom: 78px;
             }
         `)
     }
