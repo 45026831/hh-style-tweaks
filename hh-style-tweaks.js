@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.2.36
+// @version         0.2.37
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.2.37: Adding tweak to declutter PoV
 // 0.2.36: Adjusting monthly card text again to account for gems.
 // 0.2.35: Recolouring compact PoPs for gem (secondary) rewards
 // 0.2.34: Adding league table stripe colour for CxH, fixing bug on CxH with HH++ individual scores overflowing the cell
@@ -272,6 +273,10 @@
         },
         monthlyCardText: {
             name: 'Fix monthly card text',
+            default: true
+        },
+        povUnclutter: {
+            name: 'PoV page clarity',
             default: true
         }
     }
@@ -1301,6 +1306,57 @@
         sheet.insertRule(`
             #popups #no_HC .monthly_card .product-normal-price {
                 bottom: 78px;
+            }
+        `)
+    }
+
+    if (config.povUnclutter && currentPage.includes('path-of-valor')) {
+        sheet.insertRule(`
+            .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section .pov-objective {
+                height: 3.4rem;
+            }
+        `)
+        sheet.insertRule(`
+            .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section .pov-objective p .pov_potion_icn {
+                width: 20px;
+                height: 20px;
+                background-size: 19px;
+            }
+        `)
+        sheet.insertRule(`
+            .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section .pov-next-milestone-panel {
+                margin-top: 2.7rem;
+            }
+        `)
+        sheet.insertRule(`
+            .pov-gradient-panel .pov-background-panel .pov-first-row .pov-title-panel {
+                width: 14rem;
+                height: 6.3rem;
+                margin-top: -1.2rem;
+            }
+        `)
+        sheet.insertRule(`
+            .pov-gradient-panel .pov-background-panel .pov-first-row .pov-title-panel h1 {
+                margin-top: 0.6rem;
+                font-size: 0.8rem;
+            }
+        `)
+        sheet.insertRule(`
+            .pov-gradient-panel .pov-background-panel .pov-first-row .pov-title-panel h2 {
+                font-size: 1.4rem;
+            }
+        `)
+        sheet.insertRule(`
+            .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section .pov-tiers-section .pov-progress-bar-section {
+                margin-top: -3.4rem;
+                height: 20.4rem;
+                overflow-x: hidden;
+                scrollbar-width: none;
+            }
+        `)
+        sheet.insertRule(`
+            .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section.no-milestone-left .pov-tiers-section>.pov-progress-bar-section {
+                height: 24.4rem;
             }
         `)
     }
