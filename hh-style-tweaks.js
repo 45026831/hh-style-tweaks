@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.3.0
+// @version         0.3.1
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.3.1: Adjusting PoV tweak to allow for longer objectives
 // 0.3.0: Refactoring tweaks into self-contained modules to hook into HH++ 1.0.0
 // 0.2.37: Adding tweak to declutter PoV
 // 0.2.36: Adjusting monthly card text again to account for gems.
@@ -1508,7 +1509,7 @@
         injectCss() {
             this.insertRule(`
                 .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section .pov-objective {
-                    height: 3.4rem;
+                    height: 3.8rem;
                 }
             `)
             this.insertRule(`
@@ -1520,7 +1521,7 @@
             `)
             this.insertRule(`
                 .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section .pov-next-milestone-panel {
-                    margin-top: 2.7rem;
+                    margin-top: 2.3rem;
                 }
             `)
             this.insertRule(`
@@ -1544,14 +1545,14 @@
             this.insertRule(`
                 .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section .pov-tiers-section .pov-progress-bar-section {
                     margin-top: -3.4rem;
-                    height: 20.4rem;
+                    height: 20rem;
                     overflow-x: hidden;
                     scrollbar-width: none;
                 }
             `)
             this.insertRule(`
                 .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section.no-milestone-left .pov-tiers-section>.pov-progress-bar-section {
-                    height: 24.4rem;
+                    height: 24rem;
                 }
             `)
         }
