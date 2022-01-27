@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.3.1
+// @version         0.4.0
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.4.0: Adding tweak for Daily Goals
 // 0.3.1: Adjusting PoV tweak to allow for longer objectives
 // 0.3.0: Refactoring tweaks into self-contained modules to hook into HH++ 1.0.0
 // 0.2.37: Adding tweak to declutter PoV
@@ -1558,6 +1559,147 @@
         }
     }
 
+    class DailyGoalsRestyle extends STModule {
+        constructor () {
+            const baseKey = 'dailyGoals'
+            const configSchema = {
+                baseKey,
+                default: true,
+                label: 'Daily Goals restyle'
+            }
+            super({name: baseKey, configSchema})
+        }
+
+        shouldRun() {return currentPage.includes('activities')}
+
+        injectCss() {
+            this.insertRule(`
+                #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-gap: 1rem;
+                    font-size: 0.75rem;
+                    margin-top: 1.7rem;
+                    height: 78%;
+                }
+            `)
+
+            this.insertRule(`
+                #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective {
+                    width: auto;
+                    margin-bottom: 0;
+                    margin-left: 0;
+                }
+            `)
+            this.insertRule(`
+                #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective-status {
+                    flex: 1;
+                    margin-left: 0.9rem;
+                }
+            `)
+            this.insertRule(`
+                #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective .daily-goals-objective-status .objective-progress-bar {
+                    width: 100%;
+                    height: 1.1rem;
+                }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective .daily-goals-objective-action {
+                width: 2.5rem;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective .daily-goals-objective-action p {
+                display: none;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective .daily-goals-objective-action .blue_button_L {
+                padding: 0.3rem 0.75rem;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective .daily-goals-objective-status .objective-progress-bar>p {
+                font-size: .6rem;
+                width: 100%;
+                left: 0;
+                text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective .daily-goals-objective-reward>p {
+                text-shadow: 1px 1px 0 #000,-1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000;
+                margin-top: 0;
+                font-size: 0.95rem;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective .daily-goals-objective-reward {
+                width: 3.5rem;
+                height: 2.2rem;
+                flex-direction: row;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective .daily-goals-objective-reward .daily_goals_potion_icn {
+                width: 28px;
+                height: 28px;
+                background-size: contain;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .daily-goals-progress-bar {
+                overflow: hidden;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .daily-goals-rewards-container .daily-goals-reward {
+                margin-top: -1rem;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .nicescroll-rails {
+                left: 984px!important;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-right-part {
+                width: 23rem;
+                height: 11rem;
+                position: absolute;
+                right: 0;
+                overflow: hidden;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-right-part>img {
+                position: absolute;
+                top: 0.5rem;
+                right: 12rem;
+                height: 24.5rem;
+                width: auto;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-right-part .side-girl-hider {
+                display: none;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-right-part .daily-goals-timer {
+                position: absolute;
+                top: 5rem;
+                right: 1rem;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part {
+                width: 62.5rem;
+            }
+            `)
+        }
+    }
+
     const allModules = [
         new BlessingsButtonAlign(),
         new BonusFlowersOverflow(),
@@ -1590,6 +1732,7 @@
         new CompactPoPs(),
         new MonthlyCardText(),
         new PoVUnclutter(),
+        new DailyGoalsRestyle(),
     ]
 
     setTimeout(() => {
