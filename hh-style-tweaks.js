@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.4.0
+// @version         0.4.1
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.4.1: Adjusting Daily Goals chest positioning
 // 0.4.0: Adding tweak for Daily Goals
 // 0.3.1: Adjusting PoV tweak to allow for longer objectives
 // 0.3.0: Refactoring tweaks into self-contained modules to hook into HH++ 1.0.0
@@ -1695,6 +1696,13 @@
             this.insertRule(`
             #daily_goals .daily-goals-row .daily-goals-left-part {
                 width: 62.5rem;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .daily-goals-rewards-container {
+                width: 28.8rem;
+                right: 24.85em;
+                left: auto;
             }
             `)
         }
