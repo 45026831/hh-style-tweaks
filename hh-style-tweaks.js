@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.4.1
+// @version         0.4.2
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.4.2: Removing tweaks that are now obsolete in HH++ 1.0.0
 // 0.4.1: Adjusting Daily Goals chest positioning
 // 0.4.0: Adding tweak for Daily Goals
 // 0.3.1: Adjusting PoV tweak to allow for longer objectives
@@ -632,75 +633,6 @@
         }
     }
 
-    class ScriptSocials extends STModule {
-        constructor () {
-            const baseKey = 'scriptSocials'
-            const configSchema = {
-                baseKey,
-                default: false,
-                label: 'Adjust position of socials to not overlap with HH++ bars'
-            }
-            super({name: baseKey, configSchema})
-        }
-
-        shouldRun() {return currentPage.includes('home')}
-
-        injectCss() {
-            this.insertRule(`
-                .social {
-                    margin-top: 20px;
-                }
-            `)
-        }
-    }
-
-    class ScriptTimerBars extends STModule {
-        constructor () {
-            const baseKey = 'scriptTimerBars'
-            const configSchema = {
-                baseKey,
-                default: false,
-                label: 'Script timer bars'
-            }
-            super({name: baseKey, configSchema})
-        }
-
-        shouldRun() {return true}
-
-        injectCss() {
-            this.insertRule(`
-                #PoPTimer, #BoosterTimer {
-                    margin-top: 52px;
-                    font-size: 11px;
-                    height: 7px;
-                    box-shadow: 0 0 1px 0 #fff;
-                    background: rgba(102,136,153,.67);
-                    text-shadow: 1px 1px 0 #057,-1px 1px 0 #057,-1px -1px 0 #057,1px -1px 0 #057,3px 1px 5px #000;
-                }
-            `)
-
-            this.insertRule(`
-                #PoPTimer .white_text, #BoosterTimer .white_text {
-                    top: -2px;
-                    text-align: left;
-                    text-shadow: 1px 1px 0 #057,-1px 1px 0 #057,-1px -1px 0 #057,1px -1px 0 #057,3px 1px 5px #000;
-                }
-            `)
-
-            this.insertRule(`
-                #PoPTimer [rel=pop_count_txt], #BoosterTimer [rel=booster_count_txt] {
-                    color: inherit !important;
-                }
-            `)
-
-            this.insertRule(`
-                #PoPTimer .popTooltip, #BoosterTimer .boosterTooltip {
-                    text-shadow: none;
-                }
-            `)
-        }
-    }
-
     class ShrinkBundles extends STModule {
         constructor () {
             const baseKey = 'shrinkBundles'
@@ -728,28 +660,6 @@
             this.insertRule(`
                 #homepage #offers>* {
                     height: 70px;
-                }
-            `)
-        }
-    }
-
-    class BlessingsButtonAlign extends STModule {
-        constructor () {
-            const baseKey = 'blessingsButtonAlign'
-            const configSchema = {
-                baseKey,
-                default: true,
-                label: 'Align blessings button'
-            }
-            super({name: baseKey, configSchema})
-        }
-
-        shouldRun() {return true}
-
-        injectCss() {
-            this.insertRule(`
-                body>div>header #blessings-button {
-                    margin-top: 6px;
                 }
             `)
         }
@@ -1709,7 +1619,6 @@
     }
 
     const allModules = [
-        new BlessingsButtonAlign(),
         new BonusFlowersOverflow(),
         new ChampGirlPower(),
         new ChampGirlOverlap(),
@@ -1729,8 +1638,6 @@
         new PoPButtons(),
         new PoseAspectRatio(),
         new RemoveParticleEffects(),
-        new ScriptSocials(),
-        new ScriptTimerBars(),
         new SeasonsButtonBorder(),
         new ShrinkBundles(),
         new SidequestCompletionMarkers(),
