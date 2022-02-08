@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.4.2
+// @version         0.4.3
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.4.3: Adding some language-specific styles to the daily-goals tweak
 // 0.4.2: Removing tweaks that are now obsolete in HH++ 1.0.0
 // 0.4.1: Adjusting Daily Goals chest positioning
 // 0.4.0: Adding tweak for Daily Goals
@@ -1520,6 +1521,16 @@
             }
             `)
             this.insertRule(`
+            [lang="fr"] #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective .daily-goals-objective-action {
+                width: 5.5rem;
+            }
+            `)
+            this.insertRule(`
+            [lang^="es"] #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective .daily-goals-objective-action {
+                width: 4rem;
+            }
+            `)
+            this.insertRule(`
             #daily_goals .daily-goals-row .daily-goals-left-part .daily-goals-objectives-container .daily-goals-objective .daily-goals-objective-action p {
                 display: none;
             }
@@ -1601,6 +1612,11 @@
                 position: absolute;
                 top: 5rem;
                 right: 1rem;
+            }
+            `)
+            this.insertRule(`
+            [lang="fr"] #daily_goals .daily-goals-row .daily-goals-right-part .daily-goals-timer {
+                padding: 0 0.8rem;
             }
             `)
             this.insertRule(`
