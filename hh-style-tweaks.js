@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.4.3
+// @version         0.4.4
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -16,6 +16,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.4.4: Moving the skip button and girl pose aspect ratio tweaks from Style Tweaks into main script
 // 0.4.3: Adding some language-specific styles to the daily-goals tweak
 // 0.4.2: Removing tweaks that are now obsolete in HH++ 1.0.0
 // 0.4.1: Adjusting Daily Goals chest positioning
@@ -951,53 +952,6 @@
         }
     }
 
-    class MoveSkipButton extends STModule {
-        constructor () {
-            const baseKey = 'moveSkipButton'
-            const configSchema = {
-                baseKey,
-                default: true,
-                label: 'Move the battle skip button down'
-            }
-            super({name: baseKey, configSchema})
-        }
-
-        shouldRun() {return true}
-
-        injectCss() {
-            this.insertRule(`
-                #new_battle #new-battle-skip-btn {
-                    position: relative;
-                    top: 388px;
-                    z-index: 20;
-                }
-            `)
-        }
-    }
-
-    class PoseAspectRatio extends STModule {
-        constructor () {
-            const baseKey = 'poseAspectRatio'
-            const configSchema = {
-                baseKey,
-                default: true,
-                label: `Fix ${gameConfig.girl} pose aspect ratio in battle`
-            }
-            super({name: baseKey, configSchema})
-        }
-
-        shouldRun() {return true}
-
-        injectCss() {
-            this.insertRule(`
-                #new_battle .new-battle-girl-container {
-                    height: 450px;
-                    margin-top: -40px;
-                }
-            `)
-        }
-    }
-
     class BonusFlowersOverflow extends STModule {
         constructor () {
             const baseKey = 'bonusFlowersOverflow'
@@ -1646,13 +1600,11 @@
         new LeagueTableCompact(),
         new LeagueTableRowStripes(),
         new LeagueTableShadow(),
-        new MoveSkipButton(),
         new NewButtons(),
         new PoATicks(),
         new PoABorders(),
         new PoAGirlFade(),
         new PoPButtons(),
-        new PoseAspectRatio(),
         new RemoveParticleEffects(),
         new SeasonsButtonBorder(),
         new ShrinkBundles(),
