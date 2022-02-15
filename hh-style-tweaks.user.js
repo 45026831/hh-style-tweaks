@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.5.0
+// @version         0.5.1
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
 // @match           https://*.comixharem.com/*
 // @run-at          document-body
+// @namespace       https://github.com/45026831/hh-style-tweaks
 // @updateURL       https://raw.githubusercontent.com/45026831/hh-style-tweaks/main/hh-style-tweaks.user.js
 // @downloadURL     https://raw.githubusercontent.com/45026831/hh-style-tweaks/main/hh-style-tweaks.user.js
 // @grant           none
@@ -16,6 +17,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.5.1: Adding a namespace to the script metadata.
 // 0.5.0: Moving Style Tweaks to a new URL for easier installation.
 // 0.4.4: Moving the skip button and girl pose aspect ratio tweaks from Style Tweaks into main script
 // 0.4.3: Adding some language-specific styles to the daily-goals tweak
