@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.5.1
+// @version         0.6.0
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -17,6 +17,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.6.0: Adding initial tweak for Boss Bang rewards bar
 // 0.5.1: Adding a namespace to the script metadata.
 // 0.5.0: Moving Style Tweaks to a new URL for easier installation.
 // 0.4.4: Moving the skip button and girl pose aspect ratio tweaks from Style Tweaks into main script
@@ -1590,6 +1591,29 @@
             `)
         }
     }
+    class BossBangProgressBar extends STModule {
+        constructor () {
+            const baseKey = 'bbProgress'
+            const configSchema = {
+                baseKey,
+                default: true,
+                label: 'Better Boss Bang rewards progress bar'
+            }
+            super({name: baseKey, configSchema})
+        }
+
+        shouldRun() {return currentPage.includes('event.html')}
+
+        injectCss() {
+            this.insertRule(`
+            #boss_bang .boss-bang-row .boss-bang-center-part .progress-section .progress-bar-rewards-container {
+                width: 23.7rem;
+                left: 6.9rem;
+                top: -.2rem;
+            }
+            `)
+        }
+    }
 
     const allModules = [
         new BonusFlowersOverflow(),
@@ -1619,6 +1643,7 @@
         new MonthlyCardText(),
         new PoVUnclutter(),
         new DailyGoalsRestyle(),
+        new BossBangProgressBar(),
     ]
 
     setTimeout(() => {
