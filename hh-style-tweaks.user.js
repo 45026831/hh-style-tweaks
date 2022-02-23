@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.6.0
+// @version         0.6.1
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -17,6 +17,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.6.1: Updating Daily Goals tweak after class name changed in-game
 // 0.6.0: Adding initial tweak for Boss Bang rewards bar
 // 0.5.1: Adding a namespace to the script metadata.
 // 0.5.0: Moving Style Tweaks to a new URL for easier installation.
@@ -1528,12 +1529,7 @@
             }
             `)
             this.insertRule(`
-            #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .daily-goals-progress-bar {
-                overflow: hidden;
-            }
-            `)
-            this.insertRule(`
-            #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .daily-goals-rewards-container .daily-goals-reward {
+            #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .progress-bar-rewards-container .progress-bar-reward {
                 margin-top: -1rem;
             }
             `)
@@ -1583,7 +1579,7 @@
             }
             `)
             this.insertRule(`
-            #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .daily-goals-rewards-container {
+            #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .progress-bar-rewards-container {
                 width: 28.8rem;
                 right: 24.85em;
                 left: auto;
