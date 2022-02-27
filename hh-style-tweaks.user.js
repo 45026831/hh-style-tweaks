@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.6.2
+// @version         0.6.3
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -17,6 +17,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.6.3: Adjusting the contest mini-tweak to show the scrollbar in the right place
 // 0.6.2: Adding a mini tweak to fix a bug in-game where the "Contest closed" label has gone for a walkabout
 // 0.6.1: Updating Daily Goals tweak after class name changed in-game
 // 0.6.0: Adding initial tweak for Boss Bang rewards bar
@@ -1629,6 +1630,12 @@
             this.insertRule(`
             #contests>div>div.right_part>.ranking {
                 position: relative;
+            }
+            `)
+            this.insertRule(`
+            #contests>div>div.right_part>.ranking .lead_table_view>.nicescroll-rails {
+                top: 6px!important;
+                right: 8px;
             }
             `)
         }
