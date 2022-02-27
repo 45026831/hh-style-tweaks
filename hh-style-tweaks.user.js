@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.6.1
+// @version         0.6.2
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -17,6 +17,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.6.2: Adding a mini tweak to fix a bug in-game where the "Contest closed" label has gone for a walkabout
 // 0.6.1: Updating Daily Goals tweak after class name changed in-game
 // 0.6.0: Adding initial tweak for Boss Bang rewards bar
 // 0.5.1: Adding a namespace to the script metadata.
@@ -1611,6 +1612,28 @@
         }
     }
 
+    class ContestClosedLabel extends STModule {
+        constructor () {
+            const baseKey = 'contestClosedLabel'
+            const configSchema = {
+                baseKey,
+                default: true,
+                label: 'Fix the position of the "Contest closed" label'
+            }
+            super({name: baseKey, configSchema})
+        }
+
+        shouldRun() {return currentPage.includes('activities')}
+
+        injectCss() {
+            this.insertRule(`
+            #contests>div>div.right_part>.ranking {
+                position: relative;
+            }
+            `)
+        }
+    }
+
     const allModules = [
         new BonusFlowersOverflow(),
         new ChampGirlPower(),
@@ -1640,6 +1663,7 @@
         new PoVUnclutter(),
         new DailyGoalsRestyle(),
         new BossBangProgressBar(),
+        new ContestClosedLabel(),
     ]
 
     setTimeout(() => {
