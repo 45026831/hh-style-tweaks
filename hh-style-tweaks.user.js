@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.6.3
+// @version         0.6.4
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -17,6 +17,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.6.4: Fixing compact PoPs on CxH
 // 0.6.3: Adjusting the contest mini-tweak to show the scrollbar in the right place
 // 0.6.2: Adding a mini tweak to fix a bug in-game where the "Contest closed" label has gone for a walkabout
 // 0.6.1: Updating Daily Goals tweak after class name changed in-game
@@ -1168,7 +1169,7 @@
                 {pops: gemPops, icon: `https://${cdnHost}/pictures/design/gems/psychic.png`, border: '#1ddf3e'},
                 {pops: orbPops, icon: `https://${cdnHost}/pachinko/o_e1.png`, border: '#0155d1'},
                 {pops: boosterPops, icon: `https://${cdnHost}/pictures/items/B3.png`, border: '#ec0039'},
-                {pops: ticketPops, icon: `https://${cdnHost}/pictures/design/champion_ticket.png`, border: '#e95a06'},
+                {pops: ticketPops, icon: `https://${cdnHost}/pictures/design/${isCxH ? 'ic' : 'champion'}_ticket.png`, border: '#e95a06'},
                 {pops: giftPops, icon: `https://${cdnHost}/pictures/items/K4.png`, border: '#ffb244'},
             ]
 
@@ -1227,9 +1228,9 @@
                 }
             `)
             this.insertRule(`
-                #pop .pop_list .pop_list_scrolling_area .pop_thumb_expanded,
-                #pop .pop_list .pop_list_scrolling_area .pop_thumb_active,
-                #pop .pop_list .pop_list_scrolling_area .pop_thumb_greyed_out {
+                #pop .pop_list .pop_list_scrolling_area .pop_thumb_container .pop_thumb_expanded,
+                #pop .pop_list .pop_list_scrolling_area .pop_thumb_container .pop_thumb_active,
+                #pop .pop_list .pop_list_scrolling_area .pop_thumb_container .pop_thumb_greyed_out {
                     height: 99px;
                     background: linear-gradient(0deg, #00000087, transparent);
                 }
@@ -1271,7 +1272,9 @@
                     position: relative;
                     height: 24px;
                     width: 24px;
-                    background-size: cover;
+                    background-size: contain;
+                    background-position: center;
+                    background-repeat: no-repeat;
                     top: 0px;
                     left: 0px;
                     margin-bottom: -24px;
@@ -1294,8 +1297,9 @@
                     position: relative;
                     height: 24px;
                     width: 24px;
-                    background-size: cover;
+                    background-size: contain;
                     background-position: center;
+                    background-repeat: no-repeat;
                     top: 0px;
                     left: 24px;
                     margin-bottom: -24px;
