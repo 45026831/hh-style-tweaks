@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.6.4
+// @version         0.6.5
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -17,6 +17,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.6.5: Removing defunct tweak now that Kinkoid have fixed it themselves
 // 0.6.4: Fixing compact PoPs on CxH
 // 0.6.3: Adjusting the contest mini-tweak to show the scrollbar in the right place
 // 0.6.2: Adding a mini tweak to fix a bug in-game where the "Contest closed" label has gone for a walkabout
@@ -1617,34 +1618,6 @@
         }
     }
 
-    class ContestClosedLabel extends STModule {
-        constructor () {
-            const baseKey = 'contestClosedLabel'
-            const configSchema = {
-                baseKey,
-                default: true,
-                label: 'Fix the position of the "Contest closed" label'
-            }
-            super({name: baseKey, configSchema})
-        }
-
-        shouldRun() {return currentPage.includes('activities')}
-
-        injectCss() {
-            this.insertRule(`
-            #contests>div>div.right_part>.ranking {
-                position: relative;
-            }
-            `)
-            this.insertRule(`
-            #contests>div>div.right_part>.ranking .lead_table_view>.nicescroll-rails {
-                top: 6px!important;
-                right: 8px;
-            }
-            `)
-        }
-    }
-
     const allModules = [
         new BonusFlowersOverflow(),
         new ChampGirlPower(),
@@ -1674,7 +1647,6 @@
         new PoVUnclutter(),
         new DailyGoalsRestyle(),
         new BossBangProgressBar(),
-        new ContestClosedLabel(),
     ]
 
     setTimeout(() => {
