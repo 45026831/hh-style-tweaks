@@ -1,11 +1,13 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.6.5
+// @version         0.6.6
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
 // @match           https://*.comixharem.com/*
+// @match           https://*.hornyheroes.com/*
+// @match           https://*.pornstarharem.com/*
 // @run-at          document-body
 // @namespace       https://github.com/45026831/hh-style-tweaks
 // @updateURL       https://raw.githubusercontent.com/45026831/hh-style-tweaks/main/hh-style-tweaks.user.js
@@ -17,6 +19,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.6.6: Adding PSH matcher for Weds official release
 // 0.6.5: Removing defunct tweak now that Kinkoid have fixed it themselves
 // 0.6.4: Fixing compact PoPs on CxH
 // 0.6.3: Adjusting the contest mini-tweak to show the scrollbar in the right place
