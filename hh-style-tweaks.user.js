@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.6.6
+// @version         0.6.7
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -19,6 +19,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.6.7: Fixing Daily Goals tweak after game code changed
 // 0.6.6: Adding PSH matcher for Weds official release
 // 0.6.5: Removing defunct tweak now that Kinkoid have fixed it themselves
 // 0.6.4: Fixing compact PoPs on CxH
@@ -1557,11 +1558,27 @@
                 overflow: hidden;
             }
             `)
+            // PSH
             this.insertRule(`
             #daily_goals .daily-goals-row .daily-goals-right-part>img {
                 position: absolute;
                 top: 0.5rem;
                 right: 12rem;
+                height: 24.5rem;
+                width: auto;
+            }
+            `)
+            // Everything else
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-right-part .timer-girl-container {
+                position: absolute;
+                top: 0.5rem;
+                right: 12rem;
+                width: 10rem;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-right-part .timer-girl-container>img {
                 height: 24.5rem;
                 width: auto;
             }
