@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.6.7
+// @version         0.6.8
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -19,6 +19,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.6.8: Fixing Daily Goals and PoV tweaks for upcoming update
 // 0.6.7: Fixing Daily Goals tweak after game code changed
 // 0.6.6: Adding PSH matcher for Weds official release
 // 0.6.5: Removing defunct tweak now that Kinkoid have fixed it themselves
@@ -1387,9 +1388,10 @@
             super({name: baseKey, configSchema})
         }
 
-        shouldRun() {return currentPage.includes('path-of-valor')}
+        shouldRun() {return ['path-of-valor', 'path-of-glory'].some(page => currentPage.includes(page))}
 
         injectCss() {
+            // OLD, to be deleted
             this.insertRule(`
                 .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section .pov-objective {
                     height: 3.8rem;
@@ -1403,30 +1405,30 @@
                 }
             `)
             this.insertRule(`
-                .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section .pov-next-milestone-panel {
+                .pov-background-panel .pov-second-row .pov-central-section .pov-next-milestone-panel {
                     margin-top: 2.3rem;
                 }
             `)
             this.insertRule(`
-                .pov-gradient-panel .pov-background-panel .pov-first-row .pov-title-panel {
+                .pov-background-panel .pov-first-row .pov-title-panel {
                     width: 14rem;
                     height: 6.3rem;
                     margin-top: -1.2rem;
                 }
             `)
             this.insertRule(`
-                .pov-gradient-panel .pov-background-panel .pov-first-row .pov-title-panel h1 {
+                .pov-background-panel .pov-first-row .pov-title-panel h1 {
                     margin-top: 0.6rem;
                     font-size: 0.8rem;
                 }
             `)
             this.insertRule(`
-                .pov-gradient-panel .pov-background-panel .pov-first-row .pov-title-panel h2 {
+                .pov-background-panel .pov-first-row .pov-title-panel h2 {
                     font-size: 1.4rem;
                 }
             `)
             this.insertRule(`
-                .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section .pov-tiers-section .pov-progress-bar-section {
+                .pov-background-panel .pov-second-row .pov-central-section .pov-tiers-section .pov-progress-bar-section {
                     margin-top: -3.4rem;
                     height: 20rem;
                     overflow-x: hidden;
@@ -1434,7 +1436,56 @@
                 }
             `)
             this.insertRule(`
-                .pov-gradient-panel .pov-background-panel .pov-second-row .pov-central-section.no-milestone-left .pov-tiers-section>.pov-progress-bar-section {
+                .pov-background-panel .pov-second-row .pov-central-section.no-milestone-left .pov-tiers-section>.pov-progress-bar-section {
+                    height: 24rem;
+                }
+            `)
+            // NEW
+            this.insertRule(`
+                .potions-paths-background-panel .potions-paths-second-row .potions-paths-central-section .potions-paths-objective {
+                    height: 3.8rem;
+                }
+            `)
+            this.insertRule(`
+                .potions-paths-background-panel .potions-paths-second-row .potions-paths-central-section .potions-paths-objective p .potions-paths_potion_icn {
+                    width: 20px;
+                    height: 20px;
+                    background-size: 19px;
+                }
+            `)
+            this.insertRule(`
+                .potions-paths-background-panel .potions-paths-second-row .potions-paths-central-section .potions-paths-next-milestone-panel {
+                    margin-top: 2.3rem;
+                }
+            `)
+            this.insertRule(`
+                .potions-paths-background-panel .potions-paths-first-row .potions-paths-title-panel {
+                    width: 14rem;
+                    height: 6.3rem;
+                    margin-top: -1.2rem;
+                }
+            `)
+            this.insertRule(`
+                .potions-paths-background-panel .potions-paths-first-row .potions-paths-title-panel h1 {
+                    margin-top: 0.6rem;
+                    font-size: 0.8rem;
+                }
+            `)
+            this.insertRule(`
+                .potions-paths-background-panel .potions-paths-first-row .potions-paths-title-panel h2 {
+                    font-size: 1.4rem;
+                }
+            `)
+            this.insertRule(`
+                .potions-paths-background-panel .potions-paths-second-row .potions-paths-central-section .potions-paths-tiers-section .potions-paths-progress-bar-section {
+                    margin-top: -3.4rem;
+                    height: 20rem;
+                    overflow-x: hidden;
+                    scrollbar-width: none;
+                }
+            `)
+            this.insertRule(`
+                .potions-paths-background-panel .potions-paths-second-row .potions-paths-central-section.no-milestone-left .potions-paths-tiers-section>.potions-paths-progress-bar-section {
                     height: 24rem;
                 }
             `)
@@ -1608,8 +1659,7 @@
             this.insertRule(`
             #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .progress-bar-rewards-container {
                 width: 28.8rem;
-                right: 24.85em;
-                left: auto;
+                left: 8.1rem;
             }
             `)
         }
