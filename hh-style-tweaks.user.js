@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.6.8
+// @version         0.6.9
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -19,6 +19,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.6.9: More fixes to Daily Goals for upcoming update
 // 0.6.8: Fixing Daily Goals and PoV tweaks for upcoming update
 // 0.6.7: Fixing Daily Goals tweak after game code changed
 // 0.6.6: Adding PSH matcher for Weds official release
@@ -1512,8 +1513,13 @@
                     grid-template-columns: 1fr 1fr;
                     grid-gap: 1rem;
                     font-size: 0.75rem;
-                    margin-top: 1.7rem;
+                    margin-top: 0;
                     height: 78%;
+                }
+            `)
+            this.insertRule(`
+                #daily_goals .daily-goals-row .daily-goals-left-part .progress-section {
+                    margin-bottom: 1.4rem;
                 }
             `)
 
@@ -1607,6 +1613,7 @@
                 position: absolute;
                 right: 0;
                 overflow: hidden;
+                pointer-events: none;
             }
             `)
             // PSH
@@ -1660,6 +1667,13 @@
             #daily_goals .daily-goals-row .daily-goals-left-part .progress-section .progress-bar-rewards-container {
                 width: 28.8rem;
                 left: 8.1rem;
+            }
+            `)
+            this.insertRule(`
+            #daily_goals .daily-goals-row .daily-goals-left-part .top-section .check-pog {
+                position: absolute;
+                right: 3.2rem;
+                top: 0.1rem;
             }
             `)
         }
