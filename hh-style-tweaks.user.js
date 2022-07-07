@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Hentai Heroes Style Tweaks
 // @description     Some styling tweaks for HH, with some support for GH and CxH
-// @version         0.6.9
+// @version         0.7.0
 // @match           https://*.hentaiheroes.com/*
 // @match           https://nutaku.haremheroes.com/*
 // @match           https://*.gayharem.com/*
@@ -19,6 +19,7 @@
 /*  ===========
      CHANGELOG
     =========== */
+// 0.7.0: Deprecating Style Tweaks now that it's been merged into HH++
 // 0.6.9: More fixes to Daily Goals for upcoming update
 // 0.6.8: Fixing Daily Goals and PoV tweaks for upcoming update
 // 0.6.7: Fixing Daily Goals tweak after game code changed
@@ -1735,12 +1736,14 @@
 
     setTimeout(() => {
         if (window.hhPlusPlusConfig) {
-            allModules.forEach(module => {
-                hhPlusPlusConfig.registerModule(module)
-            })
-            hhPlusPlusConfig.loadConfig()
-            hhPlusPlusConfig.runModules()
+            // allModules.forEach(module => {
+            //     hhPlusPlusConfig.registerModule(module)
+            // })
+            // hhPlusPlusConfig.loadConfig()
+            // hhPlusPlusConfig.runModules()
+            console.warn('Style Tweaks as a standalone script is no longer supported. All tweaks have been merged into HH++ as of v1.18.0, so please uninstall the standalone script.')
         } else {
+            console.warn('Style Tweaks as a standalone script is deprecated and will no longer receive updates. All tweaks have been merged into HH++, available at https://github.com/45026831/hh-plus-plus')
             // Standalone Config
             const defaultConfig = allModules.map(({configSchema: {baseKey, default: defaultValue}}) => ({[baseKey]: defaultValue})).reduce((c,k) => Object.assign(c,k), {})
 
